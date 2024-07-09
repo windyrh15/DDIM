@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "employee_id": 1,
+      "name": "Achmad Rifai",
+      "start_working": 0,
+      "finished_at": 0,
+      "working_hours": "0j 0m 0d"
+    },
+    {
+      "employee_id": 2,
+      "name": "Agus Triono",
+      "start_working": 0,
+      "finished_at": 0,
+      "working_hours": "0j 0m 0d"
+    },
+    {
+      "employee_id": 3,
+      "name": "Alvyn Patty",
+      "start_working": 0,
+      "finished_at": 0,
+      "working_hours": "0j 0m 0d"
+    }
+  ]
+}

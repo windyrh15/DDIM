@@ -1,0 +1,20 @@
+{
+  "dataStatus": [
+    {
+      "status_id": 1,
+      "nama_status": "Hold"
+    },
+    {
+      "status_id": 2,
+      "nama_status": "On Going"
+    },
+    {
+      "status_id": 3,
+      "nama_status": "Won"
+    },
+    {
+      "status_id": 4,
+      "nama_status": "Lost"
+    }
+  ]
+}

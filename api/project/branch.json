@@ -1,0 +1,16 @@
+{
+  "dataBranch": [
+    {
+      "branch_id": 1,
+      "nama_branch": "Jakarta"
+    },
+    {
+      "branch_id": 2,
+      "nama_branch": "Lombok"
+    },
+    {
+      "branch_id": 3,
+      "nama_branch": "Lampung"
+    }
+  ]
+}

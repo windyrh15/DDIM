@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "total_mp_id": 1,
+      "total": "Total",
+      "total_po_acievement": 22522318222,
+      "total_pipe_line": 126943657366,
+      "total_target": 15500000000,
+      "total_sales_rate": 18,
+      "total_remaining_target": 7022318222,
+      "year": 2022
+    },
+    {
+      "total_mp_id": 2,
+      "total": "Total",
+      "total_po_acievement": 15500000000,
+      "total_pipe_line": 7022318222,
+      "total_target": 22522318222,
+      "total_sales_rate": 24,
+      "total_remaining_target": 126943657366,
+      "year": 2023
+    },
+    {
+      "total_mp_id": 3,
+      "total": "Total",
+      "total_po_acievement": 7022318222,
+      "total_pipe_line": 15500000000,
+      "total_target": 126943657366,
+      "total_sales_rate": 99,
+      "total_remaining_target": 22522318222,
+      "year": 2024
+    }
+  ]
+}

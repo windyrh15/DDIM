@@ -1,0 +1,12 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "nama_akun_pembayaran": "Bank Transfer"
+    },
+    {
+      "id": 2,
+      "nama_akun_pembayaran": "Cash"
+    }
+  ]
+}

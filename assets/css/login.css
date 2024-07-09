@@ -1,0 +1,37 @@
+.warna {
+    color: #0566C6 !important;
+}
+
+.bg-warna {
+    background-color: #0566C6 !important;
+}
+
+.btn-eei {
+    background-color: #0566C6 !important;
+}
+
+.cl-white {
+    color: white !important;
+}
+
+.ta-start {
+    text-align: left !important;
+}
+
+.ta-center {
+    text-align: center !important;
+}
+
+.ta-end {
+    text-align: right !important;
+}
+
+.custom-icon {
+    height: 35px !important;
+    width: 50px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+  

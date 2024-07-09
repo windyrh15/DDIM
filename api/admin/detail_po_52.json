@@ -1,0 +1,60 @@
+{
+  "data": [
+    {
+      "project_id": 52,
+      "doc_id": 10,
+      "doc_name": "Serah Terima",
+      "doc_type": "folder",
+      "folder_id": 1
+    },
+    {
+      "project_id": 52,
+      "doc_id": 11,
+      "doc_name": "Drawing Edited",
+      "doc_type": "folder",
+      "folder_id": 2
+    },
+    {
+      "project_id": 52,
+      "doc_id": 12,
+      "doc_name": "Progres pekerjaan 50%.pdf",
+      "doc_type": "files",
+      "folder_id": 1
+    },
+    {
+      "project_id": 52,
+      "doc_id": 15,
+      "doc_name": "Cash Flow",
+      "doc_type": "folder",
+      "folder_id": 3
+    },
+    {
+      "project_id": 52,
+      "doc_id": 22,
+      "doc_name": "Berita Acara",
+      "doc_type": "folder",
+      "folder_id": 4
+    },
+    {
+      "project_id": 52,
+      "doc_id": 23,
+      "doc_name": "1715671123106-[490] PT ENERGI ENTELEMI INDONESIA - YEEDOLAH.pdf",
+      "doc_type": "files",
+      "folder_id": 4
+    },
+    {
+      "project_id": 52,
+      "doc_id": 24,
+      "doc_name": "Seserahan",
+      "doc_type": "folder",
+      "folder_id": 5
+    },
+    {
+      "project_id": 52,
+      "doc_id": 25,
+      "doc_name": "1715936788428-Proposal Pengajuan Program Ngulixx - HIMAIF.pdf",
+      "doc_type": "files",
+      "folder_id": 5
+    }
+  ]
+}

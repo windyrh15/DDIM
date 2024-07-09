@@ -1,0 +1,16 @@
+{
+  "dataStatus": [
+    {
+      "status_id": 1,
+      "nama_status": "On Going"
+    },
+    {
+      "status_id": 2,
+      "nama_status": "Delay"
+    },
+    {
+      "status_id": 3,
+      "nama_status": "Finish"
+    }
+  ]
+}

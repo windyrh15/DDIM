@@ -1,0 +1,124 @@
+{
+  "data": [
+    {
+      "mp_id": 1,
+      "type": "Material",
+      "total_po": 4231802584,
+      "pipe_line": 29209555829,
+      "target": 2000000000,
+      "sales_rate": 14,
+      "remaining_target": 2231802584,
+      "year": 2022
+    },
+    {
+      "mp_id": 2,
+      "type": "Services",
+      "total_po": 11439458925,
+      "pipe_line": 44020860780,
+      "target": 5000000000,
+      "sales_rate": 26,
+      "remaining_target": 6439458925,
+      "year": 2022
+    },
+    {
+      "mp_id": 3,
+      "type": "Turnkey",
+      "total_po": 2979404399,
+      "pipe_line": 17413026042,
+      "target": 5000000000,
+      "sales_rate": 17,
+      "remaining_target": -2020595601,
+      "year": 2022
+    },
+    {
+      "mp_id": 4,
+      "type": "Branch Lombok",
+      "total_po": 3414423200,
+      "pipe_line": 36300214715,
+      "target": 3500000000,
+      "sales_rate": 9,
+      "remaining_target": -85576800,
+      "year": 2022
+    },
+    {
+      "mp_id": 5,
+      "type": "Material",
+      "total_po": 2979404399,
+      "pipe_line": 17413026042,
+      "target": 5000000000,
+      "sales_rate": 17,
+      "remaining_target": -2020595601,
+      "year": 2023
+    },
+    {
+      "mp_id": 6,
+      "type": "Services",
+      "total_po": 3414423200,
+      "pipe_line": 36300214715,
+      "target": 3500000000,
+      "sales_rate": 9,
+      "remaining_target": -85576800,
+      "year": 2023
+    },
+    {
+      "mp_id": 7,
+      "type": "Turnkey",
+      "total_po": 11439458925,
+      "pipe_line": 44020860780,
+      "target": 5000000000,
+      "sales_rate": 26,
+      "remaining_target": 6439458925,
+      "year": 2023
+    },
+    {
+      "mp_id": 8,
+      "type": "Branch Lombok",
+      "total_po": 4231802584,
+      "pipe_line": 29209555829,
+      "target": 2000000000,
+      "sales_rate": 14,
+      "remaining_target": 2231802584,
+      "year": 2023
+    },
+    {
+      "mp_id": 9,
+      "type": "Material",
+      "total_po": 11439458925,
+      "pipe_line": 44020860780,
+      "target": 5000000000,
+      "sales_rate": 26,
+      "remaining_target": 6439458925,
+      "year": 2024
+    },
+    {
+      "mp_id": 10,
+      "type": "Services",
+      "total_po": 4231802584,
+      "pipe_line": 29209555829,
+      "target": 2000000000,
+      "sales_rate": 14,
+      "remaining_target": 2231802584,
+      "year": 2024
+    },
+    {
+      "mp_id": 11,
+      "type": "Turnkey",
+      "total_po": 3414423200,
+      "pipe_line": 36300214715,
+      "target": 3500000000,
+      "sales_rate": 9,
+      "remaining_target": -85576800,
+      "year": 2024
+    },
+    {
+      "mp_id": 12,
+      "type": "Branch Lombok",
+      "total_po": 2979404399,
+      "pipe_line": 17413026042,
+      "target": 5000000000,
+      "sales_rate": 17,
+      "remaining_target": -2020595601,
+      "year": 2024
+    }
+  ]
+}

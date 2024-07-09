@@ -1,0 +1,458 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "owner_id": 101,
+            "user_id": 201,
+            "date": "03\/07\/2024",
+            "project_name": "Testing Data",
+            "customer": "PT JAGO INOVASI BISNIS",
+            "no_dn": "001.DN\/0010724\/VII\/2024",
+            "pic": "Dita",
+            "pic_phone": "0895339977843",
+            "material_detail": [
+                {
+                    "quantity": 1,
+                    "material": "Mini SAP Software"
+                },
+                {
+                    "quantity": 2,
+                    "material": "Additional Material 1"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "owner_id": 102,
+            "user_id": 202,
+            "date": "04\/07\/2024",
+            "project_name": "Development Project",
+            "customer": "PT TEKNO INOVASI SOLUSI",
+            "no_dn": "002.DN\/0020724\/VII\/2024",
+            "pic": "Rudi",
+            "pic_phone": "081234567890",
+            "material_detail": [
+                {
+                    "quantity": 2,
+                    "material": "Custom ERP Solution"
+                },
+                {
+                    "quantity": 3,
+                    "material": "Additional Material 2"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "owner_id": 103,
+            "user_id": 203,
+            "date": "05\/07\/2024",
+            "project_name": "Maintenance Project",
+            "customer": "PT SOLUSI DIGITAL",
+            "no_dn": "003.DN\/0030724\/VII\/2024",
+            "pic": "Siti",
+            "pic_phone": "082345678901",
+            "material_detail": [
+                {
+                    "quantity": 3,
+                    "material": "Cloud Storage Service"
+                },
+                {
+                    "quantity": 4,
+                    "material": "Additional Material 3"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "owner_id": 104,
+            "user_id": 204,
+            "date": "06\/07\/2024",
+            "project_name": "Upgrade System",
+            "customer": "PT INOVASI TEKNOLOGI",
+            "no_dn": "004.DN\/0040724\/VII\/2024",
+            "pic": "Budi",
+            "pic_phone": "083456789012",
+            "material_detail": [
+                {
+                    "quantity": 4,
+                    "material": "Database Upgrade"
+                },
+                {
+                    "quantity": 5,
+                    "material": "Additional Material 4"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "owner_id": 105,
+            "user_id": 205,
+            "date": "07\/07\/2024",
+            "project_name": "Implementation Project",
+            "customer": "PT SOLUSI BISNIS",
+            "no_dn": "005.DN\/0050724\/VII\/2024",
+            "pic": "Ani",
+            "pic_phone": "084567890123",
+            "material_detail": [
+                {
+                    "quantity": 5,
+                    "material": "Network Infrastructure"
+                },
+                {
+                    "quantity": 6,
+                    "material": "Additional Material 5"
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "owner_id": 106,
+            "user_id": 206,
+            "date": "08\/07\/2024",
+            "project_name": "Optimization Project",
+            "customer": "PT TEKNO SOLUSI",
+            "no_dn": "006.DN\/0060724\/VII\/2024",
+            "pic": "Rina",
+            "pic_phone": "085678901234",
+            "material_detail": [
+                {
+                    "quantity": 6,
+                    "material": "System Optimization"
+                },
+                {
+                    "quantity": 7,
+                    "material": "Additional Material 6"
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "owner_id": 107,
+            "user_id": 207,
+            "date": "08\/07\/2024",
+            "project_name": "Optimization Project",
+            "customer": "PT TEKNO SOLUSI",
+            "no_dn": "006.DN\/0060724\/VII\/2024",
+            "pic": "Rina333",
+            "pic_phone": "085678901234",
+            "material_detail": [
+                {
+                    "quantity": 6,
+                    "material": "System Optimization"
+                },
+                {
+                    "quantity": 6,
+                    "material": "System Optimization"
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "owner_id": 108,
+            "user_id": 208,
+            "date": "2024-07-24",
+            "project_name": "dasdas",
+            "customer": "dasdsa",
+            "no_dn": "dasdas",
+            "pic": "dasdas",
+            "pic_phone": "dasdsa",
+            "material_detail": [
+                {
+                    "quantity": 1,
+                    "material": "tes"
+                },
+                {
+                    "quantity": 2,
+                    "material": "Additional Material 7"
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "owner_id": 109,
+            "user_id": 209,
+            "date": "2024-07-08",
+            "project_name": "dadsa2",
+            "customer": "dasdsa2",
+            "no_dn": "dasdas2",
+            "pic": "dsadsa2",
+            "pic_phone": "21423423543",
+            "material_detail": [
+                {
+                    "quantity": 1,
+                    "material": "tes"
+                },
+                {
+                    "quantity": 3,
+                    "material": "Additional Material 8"
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "owner_id": "103",
+            "user_id": "203",
+            "date": "2024-07-22",
+            "project_name": "Project C",
+            "customer": "Client C",
+            "no_dn": "004.DN\/902840\/VII\/2024",
+            "pic": "cdfsdfsd",
+            "pic_phone": "085943759438",
+            "material_detail": [
+                {
+                    "material": "Bagja",
+                    "quantity": "1"
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "owner_id": "104",
+            "user_id": "204",
+            "date": "2024-07-15",
+            "project_name": "Project D",
+            "customer": "Client D",
+            "no_dn": "004.DN\/244043\/VII\/2024",
+            "pic": "dsadsadsa",
+            "pic_phone": "08594375943",
+            "material_detail": [
+                {
+                    "material": "Bagja",
+                    "quantity": "22"
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "owner_id": "104",
+            "user_id": "204",
+            "date": "2024-07-23",
+            "project_name": "Project D",
+            "customer": "Client D",
+            "no_dn": "004.DN\/276943\/VII\/2024",
+            "pic": "jjljljkjl",
+            "pic_phone": "08098768",
+            "material_detail": [
+                {
+                    "material": "Bagja",
+                    "quantity": "1"
+                },
+                {
+                    "material": "Axel",
+                    "quantity": "1"
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "owner_id": "102",
+            "user_id": "202",
+            "date": "2024-07-11",
+            "project_name": "Project B",
+            "customer": "Client B",
+            "no_dn": "004.DN\/467150\/VII\/2024",
+            "pic": "dsadsa",
+            "pic_phone": "085967954",
+            "material_detail": [
+                {
+                    "material": "dsadas",
+                    "quantity": "111"
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "owner_id": "103",
+            "user_id": "203",
+            "date": "2024-07-10",
+            "project_name": "Project C",
+            "customer": "Client C",
+            "no_dn": "004.DN\/895305\/VII\/2024",
+            "pic": "daskjdhask",
+            "pic_phone": "0428049358304534",
+            "material_detail": [
+                {
+                    "material": "dasdsadasd",
+                    "quantity": "22"
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "owner_id": "104",
+            "user_id": "204",
+            "date": "2024-07-23",
+            "project_name": "Project D",
+            "customer": "Client D",
+            "no_dn": "004.DN\/855574\/VII\/2024",
+            "pic": "dfsdfsd",
+            "pic_phone": "083475943",
+            "material_detail": [
+                {
+                    "material": "sdfs",
+                    "quantity": "32"
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "owner_id": "102",
+            "user_id": "202",
+            "date": "2024-07-17",
+            "project_name": "Project B",
+            "customer": "Client B",
+            "no_dn": "004.DN\/840674\/VII\/2024",
+            "pic": "fdsfsd",
+            "pic_phone": "08548654",
+            "material_detail": [
+                {
+                    "material": "fdsfsd",
+                    "quantity": "1"
+                }
+            ]
+        },
+        {
+            "id": 15,
+            "owner_id": "104",
+            "user_id": "204",
+            "date": "2024-07-22",
+            "project_id": "4",
+            "project_name": "Project D",
+            "customer": "Client D",
+            "no_dn": "003.DN\/962776\/VII\/2024",
+            "pic": "windy",
+            "pic_phone": "08576854",
+            "material_detail": [
+                {
+                    "material": "pipa",
+                    "quantity": "11"
+                }
+            ]
+        },
+        {
+            "id": 15,
+            "owner_id": "103",
+            "user_id": "203",
+            "date": "2024-07-08",
+            "project_id": "3",
+            "project_name": "Project C",
+            "customer": "Client C",
+            "no_dn": "003.DN\/365883\/VII\/2024",
+            "pic": "windy2",
+            "pic_phone": "084385763485",
+            "material_detail": [
+                {
+                    "material": "dsadas",
+                    "quantity": "11"
+                },
+                {
+                    "material": "",
+                    "quantity": ""
+                },
+                {
+                    "material": "",
+                    "quantity": ""
+                }
+            ]
+        },
+        {
+            "id": 16,
+            "owner_id": "105",
+            "user_id": "205",
+            "date": "2024-07-17",
+            "project_id": "5",
+            "project_name": "Project E",
+            "customer": "Client E",
+            "no_dn": "003.DN\/330068\/VII\/2024",
+            "pic": "rfefds",
+            "pic_phone": "80586",
+            "material_detail": [
+                {
+                    "material": "Bagja",
+                    "quantity": "11"
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "owner_id": "103",
+            "user_id": "203",
+            "date": "2024-07-24",
+            "project_id": "3",
+            "project_name": "Project C",
+            "customer": "Client C",
+            "no_dn": "003.DN\/746026\/VII\/2024",
+            "pic": "fsdfsfefse333333",
+            "pic_phone": "0865679654",
+            "material_detail": [
+                {
+                    "material": "windy",
+                    "quantity": "1"
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "owner_id": "103",
+            "user_id": "203",
+            "date": "2024-07-24",
+            "project_id": "3",
+            "project_name": "Project C",
+            "customer": "Client C",
+            "no_dn": "003.DN\/657680\/VII\/2024",
+            "pic": "Tessssss2222",
+            "pic_phone": "08954375438739",
+            "material_detail": [
+                {
+                    "material": "sdsasa",
+                    "quantity": "22"
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "owner_id": "104",
+            "user_id": "204",
+            "date": "2024-07-26",
+            "project_id": "4",
+            "project_name": "Project D",
+            "customer": "Client D",
+            "no_dn": "003.DN\/504264\/VII\/2024",
+            "pic": "tes1212121",
+            "pic_phone": "0874359437",
+            "material_detail": [
+                {
+                    "material": "pipa",
+                    "quantity": "11"
+                },
+                {
+                    "material": "mousepad",
+                    "quantity": "22"
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "owner_id": "103",
+            "user_id": "203",
+            "date": "2024-07-10",
+            "project_id": "3",
+            "project_name": "Project C",
+            "customer": "Client C",
+            "no_dn": "003.DN\/774775\/VII\/2024",
+            "pic": "teshsahdia22323",
+            "pic_phone": "0854837584399543",
+            "material_detail": [
+                {
+                    "material": "mousepad",
+                    "quantity": "32"
+                },
+                {
+                    "material": "dsadas222",
+                    "quantity": "2222"
+                }
+            ]
+        }
+    ]
+}

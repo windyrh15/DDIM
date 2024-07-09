@@ -1,0 +1,39 @@
+{
+  "data": [
+    {
+      "date": "2024-01-17",
+      "code_po": 824010050,
+      "amount": 22522318222,
+      "category": "Material",
+      "description": "WTI RUIS"
+    },
+    {
+      "date": "2024-01-18",
+      "code_po": 4500229329,
+      "amount": 1600000000,
+      "category": "Services",
+      "description": "SAT CGK 063"
+    },
+    {
+      "date": "2024-01-18",
+      "code_po": 4500229314,
+      "amount": 1600000000,
+      "category": "Services",
+      "description": "SAT CGK 064"
+    },
+    {
+      "date": "2024-01-18",
+      "code_po": 4500229223,
+      "amount": 6600000000,
+      "category": "Services",
+      "description": "Supervisi CGK 063"
+    },
+    {
+      "date": "2024-01-23",
+      "code_po": 4500232116,
+      "amount": 16200000000,
+      "category": "Services",
+      "description": "Air Liquid - Services"
+    }
+  ]
+}

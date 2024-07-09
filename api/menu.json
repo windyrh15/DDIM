@@ -1,0 +1,46 @@
+{
+    "menu": [
+      {
+        "icon": "fas fa-dolly-flatbed",
+        "label": "Inventory",
+        "submenu": [
+          { "label": "Bahan Baku", "url": "?page=inventory/bahan" },
+          { "label": "Kategori", "url": "?page=inventory/kategori" },
+          { "label": "Produk", "url": "?page=inventory/produk" },
+          { "label": "Assets", "url": "?page=inventory/assets" }
+        ]
+      },
+      {
+        "icon": "fas fa-users-line",
+        "label": "Resources",
+        "submenu": [
+          { "label": "Pelanggan", "url": "?page=resources/pelanggan" },
+          { "label": "Suplier", "url": "?page=resources/suplier" },
+          { "label": "Karyawan", "url": "?page=resources/karyawan" }
+        ]
+      },
+      {
+        "icon": "fas fa-table-columns",
+        "label": "Report",
+        "submenu": [
+          { "label": "Penjualan", "url": "?page=report/penjualan" },
+          { "label": "Keuangan", "url": "?page=report/keuangan" }
+        ]
+      },
+      {
+        "icon": "fas fa-cash-register",
+        "label": "Apps",
+        "submenu": [
+          { "label": "Webshop", "url": "?page=apps/webshop" },
+          { "label": "Sales", "url": "?page=apps/sales" },
+          { "label": "Pre Order", "url": "?page=apps/po" },
+          { "label": "Content Planner", "url": "?page=apps/content" },
+          { "label": "Task", "url": "?page=apps/task" },
+          { "label": "Wishlist", "url": "?page=apps/wishlist" },
+          { "label": "HPP Calculator", "url": "?page=apps/hpp" },
+          { "label": "HR", "url": "?page=apps/hr" }
+        ]
+      }
+    ]
+  }
+  

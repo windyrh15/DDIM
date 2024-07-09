@@ -1,0 +1,24 @@
+{
+  "dataType": [
+    {
+      "type_id": 1,
+      "nama_type": "Material",
+      "kode_type": "PM"
+    },
+    {
+      "type_id": 2,
+      "nama_type": "Service",
+      "kode_type": "PS"
+    },
+    {
+      "type_id": 3,
+      "nama_type": "Turn Key",
+      "kode_type": "TK"
+    },
+    {
+      "type_id": 4,
+      "nama_type": "Branch Lombok",
+      "kode_type": "BK"
+    }
+  ]
+}

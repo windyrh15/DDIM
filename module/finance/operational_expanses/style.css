@@ -1,0 +1,9 @@
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    position: absolute;
+    left: -100%; /* Menggeser submenu ke kiri */
+    top: 0;
+}

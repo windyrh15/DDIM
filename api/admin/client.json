@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "client_id": 1,
+      "client": "PT ABB SAKTI INDUSTRI",
+      "pic": "",
+      "phone": "0812345678",
+      "address": ""
+    },
+    {
+      "client_id": 2,
+      "client": "Comemd PTE LTD",
+      "pic": "Val Chow",
+      "phone": "06568622888",
+      "address": "75 Tech Park Crescent Singapore"
+    },
+    {
+      "client_id": 3,
+      "client": "PT. Indonesia Power Unit Pembangkitan Pelabhan Ratu",
+      "pic": "",
+      "phone": "",
+      "address": ""
+    }
+  ]
+}

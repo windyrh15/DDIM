@@ -1,0 +1,40 @@
+{
+  "dataUser": [
+    {
+      "user_id": 1,
+      "nama_user": "Alvyn Patty"
+    },
+    {
+      "user_id": 2,
+      "nama_user": "Bram Azarya"
+    },
+    {
+      "user_id": 3,
+      "nama_user": "Farras Hamidah"
+    },
+    {
+      "user_id": 4,
+      "nama_user": "Ivan Siregar"
+    },
+    {
+      "user_id": 5,
+      "nama_user": "Kevin"
+    },
+    {
+      "user_id": 6,
+      "nama_user": "Masitha Maghfirah"
+    },
+    {
+      "user_id": 7,
+      "nama_user": "Nadya Fadhilah"
+    },
+    {
+      "user_id": 8,
+      "nama_user": "Nisfudin Rahmat"
+    },
+    {
+      "user_id": 9,
+      "nama_user": "Ranty Andra"
+    }
+  ]
+}

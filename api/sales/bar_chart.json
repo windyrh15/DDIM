@@ -1,0 +1,292 @@
+{
+  "data": [
+    {
+      "year": 2022,
+      "bulan": "Januari",
+      "material": 232000000,
+      "services": 235000000,
+      "turnkey": 100000000,
+      "Branch Lombok": 10000000
+    },
+    {
+      "year": 2022,
+      "bulan": "Februari",
+      "material": 656000000,
+      "services": 343000000,
+      "turnkey": 25000000,
+      "Branch Lombok": 5000000
+    },
+    {
+      "year": 2022,
+      "bulan": "Maret",
+      "material": 767000000,
+      "services": 565000000,
+      "turnkey": 300000000,
+      "Branch Lombok": 25000000
+    },
+    {
+      "year": 2022,
+      "bulan": "April",
+      "material": 1454000000,
+      "services": 767000000,
+      "turnkey": 500000000,
+      "Branch Lombok": 3000000
+    },
+    {
+      "year": 2022,
+      "bulan": "Mei",
+      "material": 232000000,
+      "services": 235000000,
+      "turnkey": 100000000,
+      "Branch Lombok": 10000000
+    },
+    {
+      "year": 2022,
+      "bulan": "Juni",
+      "material": 656000000,
+      "services": 343000000,
+      "turnkey": 25000000,
+      "Branch Lombok": 5000000
+    },
+    {
+      "year": 2022,
+      "bulan": "Juli",
+      "material": 767000000,
+      "services": 565000000,
+      "turnkey": 300000000,
+      "Branch Lombok": 25000000
+    },
+    {
+      "year": 2022,
+      "bulan": "Agustus",
+      "material": 1454000000,
+      "services": 767000000,
+      "turnkey": 500000000,
+      "Branch Lombok": 3000000
+    },
+    {
+      "year": 2022,
+      "bulan": "September",
+      "material": 232000000,
+      "services": 235000000,
+      "turnkey": 100000000,
+      "Branch Lombok": 10000000
+    },
+    {
+      "year": 2022,
+      "bulan": "Oktober",
+      "material": 656000000,
+      "services": 343000000,
+      "turnkey": 25000000,
+      "Branch Lombok": 5000000
+    },
+    {
+      "year": 2022,
+      "bulan": "November",
+      "material": 767000000,
+      "services": 565000000,
+      "turnkey": 300000000,
+      "Branch Lombok": 25000000
+    },
+    {
+      "year": 2022,
+      "bulan": "Desember",
+      "material": 1454000000,
+      "services": 767000000,
+      "turnkey": 500000000,
+      "Branch Lombok": 3000000
+    },
+    {
+      "year": 2023,
+      "bulan": "Januari",
+      "material": 1454000000,
+      "services": 767000000,
+      "turnkey": 500000000,
+      "Branch Lombok": 3000000
+    },
+    {
+      "year": 2023,
+      "bulan": "Februari",
+      "material": 767000000,
+      "services": 565000000,
+      "turnkey": 300000000,
+      "Branch Lombok": 25000000
+    },
+    {
+      "year": 2023,
+      "bulan": "Maret",
+      "material": 232000000,
+      "services": 235000000,
+      "turnkey": 100000000,
+      "Branch Lombok": 10000000
+    },
+    {
+      "year": 2023,
+      "bulan": "April",
+      "material": 232000000,
+      "services": 235000000,
+      "turnkey": 100000000,
+      "Branch Lombok": 10000000
+    },
+    {
+      "year": 2023,
+      "bulan": "Mei",
+      "material": 767000000,
+      "services": 565000000,
+      "turnkey": 300000000,
+      "Branch Lombok": 25000000
+    },
+    {
+      "year": 2023,
+      "bulan": "Juni",
+      "material": 656000000,
+      "services": 343000000,
+      "turnkey": 25000000,
+      "Branch Lombok": 5000000
+    },
+    {
+      "year": 2023,
+      "bulan": "Juli",
+      "material": 656000000,
+      "services": 343000000,
+      "turnkey": 25000000,
+      "Branch Lombok": 5000000
+    },
+    {
+      "year": 2023,
+      "bulan": "Agustus",
+      "material": 656000000,
+      "services": 343000000,
+      "turnkey": 25000000,
+      "Branch Lombok": 5000000
+    },
+    {
+      "year": 2023,
+      "bulan": "September",
+      "material": 232000000,
+      "services": 235000000,
+      "turnkey": 100000000,
+      "Branch Lombok": 10000000
+    },
+    {
+      "year": 2023,
+      "bulan": "Oktober",
+      "material": 1454000000,
+      "services": 767000000,
+      "turnkey": 500000000,
+      "Branch Lombok": 3000000
+    },
+    {
+      "year": 2023,
+      "bulan": "November",
+      "material": 1454000000,
+      "services": 767000000,
+      "turnkey": 500000000,
+      "Branch Lombok": 3000000
+    },
+    {
+      "year": 2023,
+      "bulan": "Desember",
+      "material": 767000000,
+      "services": 565000000,
+      "turnkey": 300000000,
+      "Branch Lombok": 25000000
+    },
+    {
+      "year": 2024,
+      "bulan": "Januari",
+      "material": 1454000000,
+      "services": 767000000,
+      "turnkey": 500000000,
+      "Branch Lombok": 3000000
+    },
+    {
+      "year": 2024,
+      "bulan": "Februari",
+      "material": 767000000,
+      "services": 565000000,
+      "turnkey": 300000000,
+      "Branch Lombok": 25000000
+    },
+    {
+      "year": 2024,
+      "bulan": "Maret",
+      "material": 656000000,
+      "services": 343000000,
+      "turnkey": 25000000,
+      "Branch Lombok": 5000000
+    },
+    {
+      "year": 2024,
+      "bulan": "April",
+      "material": 1454000000,
+      "services": 767000000,
+      "turnkey": 500000000,
+      "Branch Lombok": 3000000
+    },
+    {
+      "year": 2024,
+      "bulan": "Mei",
+      "material": 767000000,
+      "services": 565000000,
+      "turnkey": 300000000,
+      "Branch Lombok": 25000000
+    },
+    {
+      "year": 2024,
+      "bulan": "Juni",
+      "material": 656000000,
+      "services": 343000000,
+      "turnkey": 25000000,
+      "Branch Lombok": 5000000
+    },
+    {
+      "year": 2024,
+      "bulan": "Juli",
+      "material": 232000000,
+      "services": 235000000,
+      "turnkey": 100000000,
+      "Branch Lombok": 10000000
+    },
+    {
+      "year": 2024,
+      "bulan": "Agustus",
+      "material": 1454000000,
+      "services": 767000000,
+      "turnkey": 500000000,
+      "Branch Lombok": 3000000
+    },
+    {
+      "year": 2024,
+      "bulan": "September",
+      "material": 232000000,
+      "services": 235000000,
+      "turnkey": 100000000,
+      "Branch Lombok": 10000000
+    },
+    {
+      "year": 2024,
+      "bulan": "Oktober",
+      "material": 767000000,
+      "services": 565000000,
+      "turnkey": 300000000,
+      "Branch Lombok": 25000000
+    },
+    {
+      "year": 2024,
+      "bulan": "November",
+      "material": 656000000,
+      "services": 343000000,
+      "turnkey": 25000000,
+      "Branch Lombok": 5000000
+    },
+    {
+      "year": 2024,
+      "bulan": "Desember",
+      "material": 232000000,
+      "services": 235000000,
+      "turnkey": 100000000,
+      "Branch Lombok": 10000000
+    }
+  ]
+}

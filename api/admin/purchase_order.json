@@ -1,0 +1,31 @@
+{
+  "data": [
+    {
+      "po_id": 1,
+      "po_date": "06/02/2024",
+      "po_number": "007/PO/0340223/II.2023",
+      "company_name": "PT Pandu Nusantara Sikam",
+      "project_name": "OLS SULTENG",
+      "description": "Jasa engginering OLS",
+      "amount": 97125000
+    },
+{
+      "po_id": 2,
+      "po_date": "23/07/2023",
+      "po_number": "006/PO/0261222/I.2023",
+      "company_name": "Maju Logistik",
+      "project_name": "Pengadaan generator set 10 kVA",
+      "description": "Pengiriman Genset dari Tangerang ke Lampung",
+      "amount": 4995000
+    },
+{
+      "po_id": 3,
+      "po_date": "29/04/2022",
+      "po_number": "005/PO/0191122/I.2023",
+      "company_name": "PT. DISTRITAMA PERKASA",
+      "project_name": "Pengadaan ACB KPJB",
+      "description": "ACB dan Komponen",
+      "amount": 24706308
+    }
+]
+}

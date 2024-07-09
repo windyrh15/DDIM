@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "vendor_name": "Kilat Wahana Jenggala",
+      "pic": "Ratih",
+      "phone": "089631733884",
+      "city": "Depok",
+      "address": "Raya Bogor KM 32,5. Jl. Pekapuran Kp Babakan RT. 002/004 No. 46, Kel. Curug, Kec. Cimanggis, Kota Depok"
+    },
+{
+      "vendor_name": "PT Otehade Energi Nusantara",
+      "pic": "Mahardika",
+      "phone": "081228839907",
+      "city": "Bogor",
+      "address": "Ruko Dianthus No.15 Harvest City Cipenjo"
+    },
+{
+      "vendor_name": "PT Visiotek Global Indonesia",
+      "pic": "Erna Yulianti",
+      "phone": "087812980023",
+      "city": "Bekasi",
+      "address": "Jl. Pangeran Jayakarta No.56"
+    },
+{
+      "vendor_name": "PT Pelangi Teknik Indonesia",
+      "pic": "Haikal Bagas",
+      "phone": "0856346641",
+      "city": "Jakarta Barat",
+      "address": "Hl. Hayam Wuruk"
+    }
+]
+}

@@ -1,0 +1,46 @@
+{
+  "data": [
+    {
+      "project_id": 84,
+      "doc_id": 1,
+      "doc_name": "Berita Acara",
+      "doc_type": "folder",
+      "folder_id": 1
+    },
+    {
+      "project_id": 84,
+      "doc_id": 2,
+      "doc_name": "Drawing",
+      "doc_type": "folder",
+      "folder_id": 2
+    },
+    {
+      "project_id": 84,
+      "doc_id": 3,
+      "doc_name": "Progress Pekerjaan.pdf",
+      "doc_type": "files",
+      "folder_id": 1
+    },
+    {
+      "project_id": 84,
+      "doc_id": 4,
+      "doc_name": "Penerimaan Barang.pdf",
+      "doc_type": "files",
+      "folder_id": 1
+    },
+    {
+      "project_id": 84,
+      "doc_id": 5,
+      "doc_name": "Schematic Diagram.pdf",
+      "doc_type": "files",
+      "folder_id": 2
+    },
+    {
+      "project_id": 84,
+      "doc_id": 6,
+      "doc_name": "SLD.pdf",
+      "doc_type": "files",
+      "folder_id": 2
+    }
+  ]
+}

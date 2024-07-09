@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "project_id": 84,
+      "vendor_name": "PLN",
+      "amount": 16000000
+    },
+    {
+      "project_id": 84,
+      "vendor_name": "Kominfo",
+      "amount": 3670000
+    },
+    {
+      "project_id": 84,
+      "vendor_name": "EEI",
+      "amount": 94500000
+    }
+  ]
+}

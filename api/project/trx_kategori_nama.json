@@ -1,0 +1,12 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "cat_name": "Director Operational"
+    },
+    {
+      "id": 2,
+      "cat_name": "Sales Operational"
+    }
+  ]
+}

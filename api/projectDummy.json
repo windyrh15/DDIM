@@ -1,0 +1,104 @@
+{
+    "dummyProject": [
+        {
+            "id": 1,
+            "project_name": "Website Redesign",
+            "deliverTo": "Tech Corp"
+        },
+        {
+            "id": 2,
+            "project_name": "Mobile App Development",
+            "deliverTo": "Health Inc"
+        },
+        {
+            "id": 3,
+            "project_name": "Marketing Campaign",
+            "deliverTo": "Marketing Solutions"
+        },
+        {
+            "id": 4,
+            "project_name": "Cloud Migration",
+            "deliverTo": "Cloud Services Ltd"
+        },
+        {
+            "id": 5,
+            "project_name": "Cybersecurity Audit",
+            "deliverTo": "SecureIT"
+        },
+        {
+            "id": 6,
+            "project_name": "Data Analysis",
+            "deliverTo": "Data Insights"
+        },
+        {
+            "id": 7,
+            "project_name": "SEO Optimization",
+            "deliverTo": "Marketing Masters"
+        },
+        {
+            "id": 8,
+            "project_name": "Content Creation",
+            "deliverTo": "Creative Solutions"
+        },
+        {
+            "id": 9,
+            "project_name": "System Integration",
+            "deliverTo": "Tech Solutions"
+        },
+        {
+            "id": 10,
+            "project_name": "Network Setup",
+            "deliverTo": "IT Experts"
+        },
+        {
+            "id": 11,
+            "project_name": "E-commerce Development",
+            "deliverTo": "Online Store Inc"
+        },
+        {
+            "id": 12,
+            "project_name": "UI/UX Design",
+            "deliverTo": "Design Studio"
+        },
+        {
+            "id": 13,
+            "project_name": "Digital Transformation",
+            "deliverTo": "Business Innovators"
+        },
+        {
+            "id": 14,
+            "project_name": "IT Consulting",
+            "deliverTo": "Consulting Group"
+        },
+        {
+            "id": 15,
+            "project_name": "Cloud Storage Setup",
+            "deliverTo": "Cloud Experts"
+        },
+        {
+            "id": 16,
+            "project_name": "Machine Learning Model",
+            "deliverTo": "AI Innovators"
+        },
+        {
+            "id": 17,
+            "project_name": "Cybersecurity Training",
+            "deliverTo": "Secure Solutions"
+        },
+        {
+            "id": 18,
+            "project_name": "Blockchain Integration",
+            "deliverTo": "Crypto Solutions"
+        },
+        {
+            "id": 19,
+            "project_name": "Mobile Game Development",
+            "deliverTo": "Gaming Inc"
+        },
+        {
+            "id": 20,
+            "project_name": "VR/AR Application",
+            "deliverTo": "Virtual Reality Ltd"
+        }
+    ]
+}
