@@ -80,3 +80,21 @@
 .client-item:hover {
   background-color: #f5f5f5;
 }
+
+/* Sugest */
+#suggestions {
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  background-color: white;
+}
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+}
+.suggestion-item:hover {
+  background-color: #e9ecef;
+}

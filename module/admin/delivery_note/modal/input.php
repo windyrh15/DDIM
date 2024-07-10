@@ -24,13 +24,22 @@ session_start();
 
 
 <!-- Bagian PIC dan Phone harus punya sugest ----------------------------------------------------------------------------------------- -->
-<select class="form-control" name="pic" id="pic" required>
+
+<div class="mb-3 position-relative">
+    <input type="text" id="pic" class="form-control" placeholder="Search or Add new PIC">
+    <div id="suggestions"></div>
+</div>
+<div class="mb-3">
+    <input type="text" id="phone" class="form-control" placeholder="Enter phone number">
+</div>
+            
+<!-- <select class="form-control" name="pic" id="pic" required>
     <option value="">Select PIC or Search PIC</option>
 </select>
-
+ -->
 
 <!-- Phone (Manual Input) -->
-<input type="text" name="phone" id="phone" autocomplete="off" class="swal2-input form-add" placeholder="Telepon" required>
+<!-- <input type="text" name="phone" id="phone" autocomplete="off" class="swal2-input form-add" placeholder="Telepon" required> -->
 <!-- --------------------------------------------------------------------------------------------------------------------------------- -->
 
 

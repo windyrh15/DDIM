@@ -193,185 +193,201 @@ $(document).ready(function() {
   });
 });
 
-// PIC Dropdown---------------------------------------------------------------------------------------------------------
 
+// Fungsi untuk memfilter input hanya berupa angka ----------------------------------------------------------------------------------------
 async function populateSelectPIC() {
+  var people = [];
+  var nameInput = document.getElementById('pic');
+  var phoneInput = document.getElementById('phone');
+  var suggestions = document.getElementById('suggestions');
+
   try {
-      const response = await fetch(picData, {
-          method: "GET",
-          headers: headersTes,
-      });
-      if (!response.ok) {
-          throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      const pic = data.data;
-
-      const select = document.getElementById("pic");
-      if (!select) {
-          throw new Error('Element with ID "pic" not found');
-      }
-
-      pic.forEach((item) => {
-          const option = document.createElement("option");
-          option.value = item.pic;
-          option.textContent = item.pic;
-          select.appendChild(option);
-      });
-
-      // Initialize Tom Select
-      new TomSelect('#pic', {
-          // create: true, //Jika ingin menginputkan data pic baru
-      });
-
-      select.addEventListener("change", () => {
-          const selectedPIC = pic.find(
-              (item) => item.pic == select.value
-          );
-          if (selectedPIC) {
-              document.getElementById("phone").value = selectedPIC.pic_phone;
-          } else {
-              document.getElementById("phone").value = "";
+      const response = await fetch('https://apiddim.booq.id/data/pic', {
+          headers: {
+              'Authorization': 'Bearer DpacnJf3uEQeM7HN'
           }
       });
+      const data = await response.json();
+      people = data.data.map(person => ({
+          name: person.pic,
+          phone: person.pic_phone
+      }));
   } catch (error) {
-      console.error("Error loading JSON data:", error);
+      console.error('Error fetching data:', error);
   }
+
+  nameInput.addEventListener('input', function() {
+      var query = nameInput.value.toLowerCase();
+      suggestions.innerHTML = '';
+      if (query) {
+          var filteredPeople = people.filter(function(person) {
+              return person.name.toLowerCase().includes(query);
+          });
+          filteredPeople.forEach(function(person) {
+              var div = document.createElement('div');
+              div.className = 'suggestion-item';
+              div.textContent = person.name + " (" + person.phone + ")";
+              div.addEventListener('click', function() {
+                  nameInput.value = person.name;
+                  phoneInput.value = person.phone;
+                  suggestions.innerHTML = '';
+              });
+              suggestions.appendChild(div);
+          });
+      }
+  });
+
+  document.getElementById('searchForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      var selectedName = nameInput.value;
+      var phoneNumber = phoneInput.value;
+      Swal.fire({
+          title: 'Are you sure?',
+          text: `Selected or Added Name: ${selectedName}, Phone Number: ${phoneNumber}`,
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'Submit',
+          cancelButtonText: 'Cancel'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              var personExists = people.some(function(person) {
+                  return person.name === selectedName;
+              });
+              if (!personExists) {
+                  people.push({name: selectedName, phone: phoneNumber});
+              }
+              Swal.fire('Submitted!', `Name: ${selectedName}, Phone: ${phoneNumber}`, 'success');
+              nameInput.value = '';
+              phoneInput.value = '';
+              suggestions.innerHTML = '';
+          }
+      });
+  });
+
+  document.addEventListener('click', function(event) {
+      if (!event.target.closest('#pic') && !event.target.closest('#suggestions')) {
+          suggestions.innerHTML = '';
+      }
+  });
 }
 
-// Panggil fungsi populateSelectPIC saat halaman dimuat
-document.addEventListener("DOMContentLoaded", populateSelectPIC);
-
-// Initialize niceScroll (example usage)
-$(document).ready(function() {
-  $("body").niceScroll({
-      cursorcolor: "#424242",
-      cursorwidth: "6px",
-      background: "#ddd",
-      cursorborder: "none",
-      cursorborderradius: "5px"
-  });
-});
-
-
-// ShowInputForm -----------------------------------------------------------------------------------------------
 async function showInputForm() {
   try {
-    const response = await fetch("module/" + page + "/modal/input.php");
-    if (!response.ok) throw new Error("Network response was not ok");
-    const htmlContent = await response.text();
+      const response = await fetch("module/" + page + "/modal/input.php");
+      if (!response.ok) throw new Error("Network response was not ok");
+      const htmlContent = await response.text();
 
-    Swal.fire({
-      title: "Add New Delivery Note",
-      html: htmlContent,
-      showCancelButton: true,
-      confirmButtonText: "Add",
-      cancelButtonText: "Cancel",
-      focusConfirm: false,
-      didOpen: async () => {
-        await populateSelect(); // Panggil fungsi untuk mengisi select setelah elemen Project dibuat
-        await populateSelectPIC(); // Panggil fungsi untuk mengisi select setelah elemen PIC dibuat
+      Swal.fire({
+          title: "Add New Delivery Note",
+          html: htmlContent,
+          showCancelButton: true,
+          confirmButtonText: "Add",
+          cancelButtonText: "Cancel",
+          focusConfirm: false,
+          didOpen: async () => {
+              await populateSelect(); 
+              await new Promise(resolve => setTimeout(resolve, 0)); 
+              await populateSelectPIC(); 
 
-        // Tambahkan event listener ke tombol "Add Material"
-        document
-          .getElementById("materialButton")
-          .addEventListener("click", tambahMaterial);
-      },
-      preConfirm: async () => {
-        const owner = Swal.getPopup().querySelector("#owner_id").value;
-        const user = Swal.getPopup().querySelector("#user_id").value;
-        const projectId = Swal.getPopup().querySelector("#project").value;
-        const pelangganId =
-          Swal.getPopup().querySelector("#pelanggan_id").value;
-        const prefix = Swal.getPopup().querySelector("#prefix").value;
-        const tanggal = Swal.getPopup().querySelector("#tanggal").value;
-        const formatNo = Swal.getPopup().querySelector("#formatNo").value;
-        const pic = Swal.getPopup().querySelector("#pic").value;
-        const phone = Swal.getPopup().querySelector("#phone").value;
+              document.getElementById("materialButton").addEventListener("click", tambahMaterial);
+          },
+          preConfirm: async () => {
+              const owner = Swal.getPopup().querySelector("#owner_id").value;
+              const user = Swal.getPopup().querySelector("#user_id").value;
+              const projectId = Swal.getPopup().querySelector("#project").value;
+              const pelangganId = Swal.getPopup().querySelector("#pelanggan_id").value;
+              const prefix = Swal.getPopup().querySelector("#prefix").value;
+              const tanggal = Swal.getPopup().querySelector("#tanggal").value;
+              const formatNo = Swal.getPopup().querySelector("#formatNo").value;
+              const pic = Swal.getPopup().querySelector("#pic").value;
+              const phone = Swal.getPopup().querySelector("#phone").value;
 
-        // Ini yang jangan di hapus soalnya harusnya ini di pake tapi gua kaga ngarti heheh -------------
-        // ------------------------------------------------------------------------------------------------------------------------------------------------
-        // if (
-        //   !projectId ||
-        //   !pelangganId ||
-        //   !prefix ||
-        //   !tanggal ||
-        //   !formatNo ||
-        //   !pic ||
-        //   !phone
-        // ) {
-        //   Swal.showValidationMessage("All fields are required!");
-        //   return false; // Prevent closing
-        // }
-        // ------------------------------------------------------------------------------------------------------------------------------------------------
+              if (!validateMaterials()) {
+                  Swal.showValidationMessage("At least one material and quantity must be filled out.");
+                  return false; 
+              }
 
-        if (!validateMaterials()) {
-          Swal.showValidationMessage(
-            "At least one material and quantity must be filled out."
-          );
-          return false; // Prevent closing
-        }
+              const materials = Swal.getPopup().querySelectorAll('input[name="material[]"]');
+              const quantities = Swal.getPopup().querySelectorAll('input[name="quantity[]"]');
 
-        // const project = document.querySelector(`#project option[value="${projectId}"]`).textContent;
+              const materialDetails = [];
+              for (let i = 0; i < materials.length; i++) {
+                  if (materials[i].value && quantities[i].value) {
+                      materialDetails.push({
+                          material: materials[i].value,
+                          quantity: quantities[i].value,
+                      });
+                  }
+              }
 
-        const materials = Swal.getPopup().querySelectorAll(
-          'input[name="material[]"]'
-        );
-        const quantities = Swal.getPopup().querySelectorAll(
-          'input[name="quantity[]"]'
-        );
+              if (!projectId) {
+                  Swal.showValidationMessage("Project is required");
+                  return false;
+              }
+              if (!tanggal) {
+                  Swal.showValidationMessage("Date is required");
+                  return false;
+              }
+              if (!pic) {
+                  Swal.showValidationMessage("PIC is required");
+                  return false;
+              }
+              if (!phone) {
+                  Swal.showValidationMessage("Phone is required");
+                  return false;
+              }
 
-        const materialDetails = [];
-        for (let i = 0; i < materials.length; i++) {
-          if (materials[i].value && quantities[i].value) {
-            materialDetails.push({
-              material: materials[i].value,
-              quantity: quantities[i].value,
-            });
-          }
-        }
+              const newData = {
+                  owner_id: owner,
+                  user_id: user,
+                  project_id: projectId,
+                  pelanggan_id: pelangganId,
+                  prefix: prefix,
+                  date: tanggal,
+                  no_dn: formatNo,
+                  pic: pic,
+                  pic_phone: phone,
+                  material_detail: materialDetails,
+              };
 
-        const newData = {
-          owner_id: owner,
-          user_id: user,
-          project_id: projectId,
-          pelanggan_id: pelangganId,
-          prefix: prefix,
-          date: tanggal,
-          no_dn: formatNo,
-          pic: pic,
-          pic_phone: phone,
-          material_detail: materialDetails,
-        };
+              try {
+                  const res = await fetch(addDeliveryNote, {
+                      method: "POST",
+                      headers: headersTes,
+                      body: JSON.stringify(newData),
+                  });
 
-        try {
-          const res = await fetch(addDeliveryNote, {
-            method: "POST",
-            headers: headersTes,
-            body: JSON.stringify(newData),
-          });
-
-          const result = await res.json();
-          if (res.ok) {
-            Swal.fire({
-              title: "Success",
-              text: result.message,
-              icon: "success",
-            }).then(() => {
-              location.reload();
-            });
-          } else {
-            Swal.fire("Error", result.error, "error");
-          }
-        } catch (error) {
-          console.error("Error adding data:", error);
-          Swal.fire("Error", "Failed to add data", "error");
-        }
-      },
-    });
+                  const result = await res.json();
+                  if (res.ok) {
+                      Swal.fire({
+                          title: "Success",
+                          text: result.message,
+                          icon: "success",
+                      }).then(() => {
+                          location.reload();
+                      });
+                  } else {
+                      Swal.fire("Error", result.error, "error");
+                  }
+              } catch (error) {
+                  console.error("Error adding data:", error);
+                  Swal.fire("Error", "Failed to add data", "error");
+              }
+          },
+      });
   } catch (error) {
-    console.error("Error:", error);
+      console.error("Error:", error);
   }
 }
-// Panggil fungsi populateSelect saat halaman dimuat
-document.addEventListener("DOMContentLoaded", populateSelect);
+
+function validateMaterials() {
+  const materials = document.querySelectorAll('input[name="material[]"]');
+  const quantities = document.querySelectorAll('input[name="quantity[]"]');
+  
+  for (let i = 0; i < materials.length; i++) {
+      if (!materials[i].value || !quantities[i].value) {
+          return false;
+      }
+  }
+  return true;
+}

@@ -130,7 +130,6 @@ async function populateProjectFields(projectName) {
   }
 }
 
-// Edit modal form -------------------------------------------------------------------------------------------------------------------------------------------------------
 async function showEditForm(deliveryId) {
   try {
     const urlDeliveryNote = `${deliveryNote}${deliveryId}`;
@@ -171,7 +170,33 @@ async function showEditForm(deliveryId) {
       focusConfirm: false,
       didOpen: async () => {
         await populateSelect(); // Populate select options
-        await populateSelectPIC()
+
+        // Menggabungkan logika populateSelectPICEdit di sini
+        var people = [];
+        var nameInput = document.getElementById('pic');
+        var phoneInput = document.getElementById('phone');
+        var suggestions = document.getElementById('suggestions');
+
+        try {
+            const response = await fetch('https://apiddim.booq.id/data/pic', {
+                headers: {
+                    'Authorization': 'Bearer DpacnJf3uEQeM7HN'
+                }
+            });
+            const data = await response.json();
+            people = data.data.map(person => ({
+                name: person.pic,
+                phone: person.pic_phone
+            }));
+            console.log("Data fetched:", people);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+
+        if (!nameInput || !phoneInput || !suggestions) {
+          console.error("Required input elements not found.");
+          return;
+        }
 
         document.getElementById("tanggal").value = formattedDate;
         document.getElementById("formatNo").value = data.data[0].no_dn;
@@ -212,27 +237,73 @@ async function showEditForm(deliveryId) {
 
         // Update delete button visibility based on number of material items
         updateDeleteButtons();
+
+
+        nameInput.addEventListener('input', function() {
+          var query = nameInput.value.toLowerCase();
+          suggestions.innerHTML = '';
+          if (query) {
+              var filteredPeople = people.filter(function(person) {
+                  return person.name.toLowerCase().includes(query);
+              });
+              filteredPeople.forEach(function(person) {
+                  var div = document.createElement('div');
+                  div.className = 'suggestion-item';
+                  div.textContent = person.name + " (" + person.phone + ")";
+                  div.addEventListener('click', function() {
+                      nameInput.value = person.name;
+                      phoneInput.value = person.phone;
+                      suggestions.innerHTML = '';
+                  });
+                  suggestions.appendChild(div);
+              });
+          }
+      });
+
+      document.getElementById('searchForm').addEventListener('submit', function(event) {
+          event.preventDefault();
+          var selectedName = nameInput.value;
+          var phoneNumber = phoneInput.value;
+          Swal.fire({
+              title: 'Are you sure?',
+              text: `Selected or Added Name: ${selectedName}, Phone Number: ${phoneNumber}`,
+              icon: 'question',
+              showCancelButton: true,
+              confirmButtonText: 'Submit',
+              cancelButtonText: 'Cancel'
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  var personExists = people.some(function(person) {
+                      return person.name === selectedName;
+                  });
+                  if (!personExists) {
+                      people.push({name: selectedName, phone: phoneNumber});
+                  }
+                  Swal.fire('Submitted!', `Name: ${selectedName}, Phone: ${phoneNumber}`, 'success');
+                  nameInput.value = '';
+                  phoneInput.value = '';
+                  suggestions.innerHTML = '';
+              }
+          });
+      });
+
+      document.addEventListener('click', function(event) {
+          if (!event.target.closest('#pic') && !event.target.closest('#suggestions')) {
+              suggestions.innerHTML = '';
+          }
+      });
       },
       preConfirm: async () => {
-        // Buat pengkondisian Project ---------------------------------------------------------------
+        // Validasi inputan user sebelum update
         const projectId = Swal.getPopup().querySelector("#project").value;
-        const pelangganId =
-          Swal.getPopup().querySelector("#pelanggan_id").value;
-        const project_id_old =
-          Swal.getPopup().querySelector("#project_id_old").value;
-        const pelanggan_id_old =
-          Swal.getPopup().querySelector("#pelanggan_id_old").value;
-        // -----------------------------------------------------------------------------------
+        const pelangganId = Swal.getPopup().querySelector("#pelanggan_id").value;
+        const project_id_old = Swal.getPopup().querySelector("#project_id_old").value;
+        const pelanggan_id_old = Swal.getPopup().querySelector("#pelanggan_id_old").value;
 
-        // Buat pengkondisian Pic ---------------------------------------------------------------
         const pic = Swal.getPopup().querySelector("#pic").value;
-        const phone =
-          Swal.getPopup().querySelector("#phone").value;
-        const oldPic =
-          Swal.getPopup().querySelector("#old_pic").value;
-        const oldPhone =
-          Swal.getPopup().querySelector("#old_pic_phone").value;
-        // -----------------------------------------------------------------------------------
+        const phone = Swal.getPopup().querySelector("#phone").value;
+        const oldPic = Swal.getPopup().querySelector("#old_pic").value;
+        const oldPhone = Swal.getPopup().querySelector("#old_pic_phone").value;
 
         const prefix = Swal.getPopup().querySelector("#prefix").value;
         const tanggal = Swal.getPopup().querySelector("#tanggal").value;
@@ -243,15 +314,28 @@ async function showEditForm(deliveryId) {
           Swal.showValidationMessage(
             "At least one material and quantity must be filled out."
           );
-          return false; // Prevent closing
+          return false;
         }
 
-        const materials = Swal.getPopup().querySelectorAll(
-          'input[name="material[]"]'
-        );
-        const quantities = Swal.getPopup().querySelectorAll(
-          'input[name="quantity[]"]'
-        );
+        if (!projectId && !project_id_old) {
+          Swal.showValidationMessage("Project is required");
+          return false;
+        }
+        if (!tanggal) {
+          Swal.showValidationMessage("Date is required");
+          return false;
+        }
+        if (!pic && !oldPic) {
+          Swal.showValidationMessage("PIC is required");
+          return false;
+        }
+        if (!phone && !oldPhone) {
+          Swal.showValidationMessage("Phone is required");
+          return false;
+        }
+
+        const materials = Swal.getPopup().querySelectorAll('input[name="material[]"]');
+        const quantities = Swal.getPopup().querySelectorAll('input[name="quantity[]"]');
 
         const materialDetails = [];
         for (let i = 0; i < materials.length; i++) {
@@ -263,7 +347,6 @@ async function showEditForm(deliveryId) {
           }
         }
 
-        // Pengkondisian untuk updatedData
         const updatedData = {
           project_id: projectId || project_id_old,
           pelanggan_id: pelangganId || pelanggan_id_old,
@@ -316,3 +399,15 @@ document.querySelectorAll(".edit-btn").forEach((button) => {
     showEditForm(deliveryId);
   });
 });
+
+function validateMaterials() {
+  const materials = document.querySelectorAll('input[name="material[]"]');
+  const quantities = document.querySelectorAll('input[name="quantity[]"]');
+  
+  for (let i = 0; i < materials.length; i++) {
+    if (!materials[i].value || !quantities[i].value) {
+      return false;
+    }
+  }
+  return true;
+}
