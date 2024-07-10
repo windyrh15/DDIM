@@ -62,6 +62,17 @@ $tMobile = "d-block d-md-none d-lg-none";
 <link rel="stylesheet" href="assets/css/components.css">
 <link rel="stylesheet" href="assets/css/loading.min.css?v=<?= $loadingcss ?>">
 
+
+<!-- Tom Select CSS -->
+<link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.bootstrap4.min.css" rel="stylesheet">
+<!-- Tom Select CSS (default) as fallback -->
+<link href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css" rel="stylesheet">
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!-- niceScroll -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+
 <!-- Module Page JS File -->
 <link rel="stylesheet" href="<?= $urlserver ?>/style.css?v=<?= $cssversion ?>">
 

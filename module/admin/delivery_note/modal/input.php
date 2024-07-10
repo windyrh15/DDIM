@@ -12,9 +12,9 @@ session_start();
                                                                                     echo date("Y-m-d"); ?>" required>
 
 <!-- pilih project -->
-<select class="swal2-input form-add" name="project" id="project" required>
-    <option value="">Select Project</option>
-</select>
+<select class="swal2-input form-control" name="project" id="project" required>
+    <option value="">Select Project or Search Project</option>
+</select> 
 
 <!-- DeliverTo -->
 <input type="text" name="deliverTo" id="deliverTo" autocomplete="off" placeholder="Delivery To" class="swal2-input form-add" required readonly>
@@ -24,13 +24,13 @@ session_start();
 
 
 <!-- Bagian PIC dan Phone harus punya sugest ----------------------------------------------------------------------------------------- -->
-<!-- PIC (manual Input) -->
-<input type="text" name="pic" id="pic" autocomplete="off" class="swal2-input form-add" placeholder="PIC" required>
-<div id="picList" class="list-group position-absolute"></div>
+<select class="form-control" name="pic" id="pic" required>
+    <option value="">Select PIC or Search PIC</option>
+</select>
+
 
 <!-- Phone (Manual Input) -->
 <input type="text" name="phone" id="phone" autocomplete="off" class="swal2-input form-add" placeholder="Telepon" required>
-<div id="phoneList" class="list-group position-absolute"></div>
 <!-- --------------------------------------------------------------------------------------------------------------------------------- -->
 
 

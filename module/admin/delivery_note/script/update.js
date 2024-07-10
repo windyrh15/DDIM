@@ -171,12 +171,13 @@ async function showEditForm(deliveryId) {
       focusConfirm: false,
       didOpen: async () => {
         await populateSelect(); // Populate select options
+        await populateSelectPIC()
 
         document.getElementById("tanggal").value = formattedDate;
-        document.getElementById("prefix").value = data.data[0].prefix;
         document.getElementById("formatNo").value = data.data[0].no_dn;
-        document.getElementById("pic").value = data.data[0].pic;
-        document.getElementById("phone").value = data.data[0].pic_phone;
+        document.getElementById("old_picView").value = `${data.data[0].pic} - (PIC Sebelumnya )`;
+        document.getElementById("old_pic").value = data.data[0].pic;
+        document.getElementById("old_pic_phone").value = data.data[0].pic_phone;
         document.getElementById(
           "oldProjectName"
         ).value = `${data.data[0].project_name} - (Project Sebelumnya)`;
@@ -213,7 +214,7 @@ async function showEditForm(deliveryId) {
         updateDeleteButtons();
       },
       preConfirm: async () => {
-        // Buat pengkondisian ---------------------------------------------------------------
+        // Buat pengkondisian Project ---------------------------------------------------------------
         const projectId = Swal.getPopup().querySelector("#project").value;
         const pelangganId =
           Swal.getPopup().querySelector("#pelanggan_id").value;
@@ -223,11 +224,19 @@ async function showEditForm(deliveryId) {
           Swal.getPopup().querySelector("#pelanggan_id_old").value;
         // -----------------------------------------------------------------------------------
 
+        // Buat pengkondisian Pic ---------------------------------------------------------------
+        const pic = Swal.getPopup().querySelector("#pic").value;
+        const phone =
+          Swal.getPopup().querySelector("#phone").value;
+        const oldPic =
+          Swal.getPopup().querySelector("#old_pic").value;
+        const oldPhone =
+          Swal.getPopup().querySelector("#old_pic_phone").value;
+        // -----------------------------------------------------------------------------------
+
         const prefix = Swal.getPopup().querySelector("#prefix").value;
         const tanggal = Swal.getPopup().querySelector("#tanggal").value;
         const formatNo = Swal.getPopup().querySelector("#formatNo").value;
-        const pic = Swal.getPopup().querySelector("#pic").value;
-        const phone = Swal.getPopup().querySelector("#phone").value;
         const deliverTo = Swal.getPopup().querySelector("#deliverTo").value;
 
         if (!validateMaterials()) {
@@ -261,8 +270,8 @@ async function showEditForm(deliveryId) {
           prefix: prefix,
           date: tanggal,
           no_dn: formatNo,
-          pic: pic,
-          pic_phone: phone,
+          pic: pic || oldPic,
+          pic_phone: phone || oldPhone,
           client: deliverTo || data.data[0].client,
           material_detail: materialDetails,
         };

@@ -131,59 +131,128 @@ function validateMaterials() {
   return false;
 }
 
-// PopulateSelect (selectOption) ----------------------------------------------------------------------------
+// PopulateSelect (selectOption) Dropdown ----------------------------------------------------------------------------
 async function populateSelect() {
   const formatNo = await generateFormatNo(); // Generate formatNo
   try {
-    const response = await fetch(projectData, {
-      method: "GET",
-      headers: headers,
-    });
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    const data = await response.json();
-    const projects = data.dataProject;
-
-    const select = document.getElementById("project");
-    console.log(select);
-    if (!select) {
-      throw new Error('Element with ID "project" not found');
-    }
-
-    projects.forEach((project) => {
-      const option = document.createElement("option");
-      option.value = project.project_id;
-      option.textContent = project.project_name;
-      select.appendChild(option);
-    });
-
-    select.addEventListener("change", () => {
-      const selectedProject = projects.find(
-        (project) => project.project_id == select.value
-      );
-      if (selectedProject) {
-        // document.getElementById('owner').value = selectedProject.owner_id;
-        // document.getElementById('user').value = selectedProject.user_id;
-        document.getElementById("pelanggan_id").value =
-          selectedProject.pelanggan_id;
-        document.getElementById("deliverTo").value = selectedProject.client;
-        document.getElementById("formatNo").value = formatNo;
-      } else {
-        document.getElementById("pelanggan_id").value = "";
-        document.getElementById("deliverTo").value = "";
-        // document.getElementById('owner').value = '';
-        // document.getElementById('user').value = '';
-        document.getElementById("formatNo").value = "";
+      const response = await fetch(projectData, {
+          method: "GET",
+          headers: headers,
+      });
+      if (!response.ok) {
+          throw new Error("Network response was not ok");
       }
-    });
+      const data = await response.json();
+      const projects = data.dataProject;
+
+      const select = document.getElementById("project");
+      if (!select) {
+          throw new Error('Element with ID "project" not found');
+      }
+
+      projects.forEach((project) => {
+          const option = document.createElement("option");
+          option.value = project.project_id;
+          option.textContent = project.project_name;
+          select.appendChild(option);
+      });
+
+      // Initialize Tom Select
+      new TomSelect('#project');
+
+      select.addEventListener("change", () => {
+          const selectedProject = projects.find(
+              (project) => project.project_id == select.value
+          );
+          if (selectedProject) {
+              document.getElementById("pelanggan_id").value = selectedProject.pelanggan_id;
+              document.getElementById("deliverTo").value = selectedProject.client;
+              document.getElementById("formatNo").value = formatNo;
+          } else {
+              document.getElementById("pelanggan_id").value = "";
+              document.getElementById("deliverTo").value = "";
+              document.getElementById("formatNo").value = "";
+          }
+      });
   } catch (error) {
-    console.error("Error loading JSON data:", error);
+      console.error("Error loading JSON data:", error);
   }
 }
 
 // Panggil fungsi populateSelect saat halaman dimuat
 document.addEventListener("DOMContentLoaded", populateSelect);
+
+// Initialize niceScroll (example usage)
+$(document).ready(function() {
+  $("body").niceScroll({
+      cursorcolor: "#424242",
+      cursorwidth: "6px",
+      background: "#ddd",
+      cursorborder: "none",
+      cursorborderradius: "5px"
+  });
+});
+
+// PIC Dropdown---------------------------------------------------------------------------------------------------------
+
+async function populateSelectPIC() {
+  try {
+      const response = await fetch(picData, {
+          method: "GET",
+          headers: headersTes,
+      });
+      if (!response.ok) {
+          throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      const pic = data.data;
+
+      const select = document.getElementById("pic");
+      if (!select) {
+          throw new Error('Element with ID "pic" not found');
+      }
+
+      pic.forEach((item) => {
+          const option = document.createElement("option");
+          option.value = item.pic;
+          option.textContent = item.pic;
+          select.appendChild(option);
+      });
+
+      // Initialize Tom Select
+      new TomSelect('#pic', {
+          // create: true, //Jika ingin menginputkan data pic baru
+      });
+
+      select.addEventListener("change", () => {
+          const selectedPIC = pic.find(
+              (item) => item.pic == select.value
+          );
+          if (selectedPIC) {
+              document.getElementById("phone").value = selectedPIC.pic_phone;
+          } else {
+              document.getElementById("phone").value = "";
+          }
+      });
+  } catch (error) {
+      console.error("Error loading JSON data:", error);
+  }
+}
+
+// Panggil fungsi populateSelectPIC saat halaman dimuat
+document.addEventListener("DOMContentLoaded", populateSelectPIC);
+
+// Initialize niceScroll (example usage)
+$(document).ready(function() {
+  $("body").niceScroll({
+      cursorcolor: "#424242",
+      cursorwidth: "6px",
+      background: "#ddd",
+      cursorborder: "none",
+      cursorborderradius: "5px"
+  });
+});
+
 
 // ShowInputForm -----------------------------------------------------------------------------------------------
 async function showInputForm() {
@@ -200,7 +269,8 @@ async function showInputForm() {
       cancelButtonText: "Cancel",
       focusConfirm: false,
       didOpen: async () => {
-        await populateSelect(); // Panggil fungsi untuk mengisi select setelah elemen dibuat
+        await populateSelect(); // Panggil fungsi untuk mengisi select setelah elemen Project dibuat
+        await populateSelectPIC(); // Panggil fungsi untuk mengisi select setelah elemen PIC dibuat
 
         // Tambahkan event listener ke tombol "Add Material"
         document

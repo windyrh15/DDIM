@@ -30,5 +30,7 @@ if ($detail) {
     <script src='module/$page/script/input.js?v=$input'></script>
     <script src='module/$page/script/update.js?v=$update'></script>
     <script src='module/$page/script/delete.js?v=$delete'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js'></script>
+    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'></script>
     ";
 }
