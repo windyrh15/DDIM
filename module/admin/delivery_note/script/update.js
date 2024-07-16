@@ -1,33 +1,34 @@
 // Tambah material update ------------------------------------------------------------------------------------------------------------------------------------------------------
+
 function tambahMaterialUpdate() {
-  const container = document.querySelector("#materialContainer");
+  const materialContainer = document.querySelector("#materialContainer");
 
-  const materialFormInput = document.createElement("div");
-  materialFormInput.classList.add("row", "mb-2");
+  const materialFormRow = document.createElement("div");
+  materialFormRow.classList.add("row", "mb-2");
 
-  const inputMaterialCol = document.createElement("div");
-  inputMaterialCol.classList.add("col");
+  const materialInputCol = document.createElement("div");
+  materialInputCol.classList.add("col");
 
-  const inputMaterial = document.createElement("input");
-  inputMaterial.type = "text";
-  inputMaterial.name = "material[]";
-  inputMaterial.placeholder = "Material";
-  inputMaterial.classList.add("form-control");
-  inputMaterial.required = true;
+  const materialInput = document.createElement("input");
+  materialInput.type = "text";
+  materialInput.name = "material[]";
+  materialInput.placeholder = "Material";
+  materialInput.classList.add("form-control");
+  materialInput.required = true;
 
-  inputMaterialCol.appendChild(inputMaterial);
+  materialInputCol.appendChild(materialInput);
 
-  const inputQuantityCol = document.createElement("div");
-  inputQuantityCol.classList.add("col");
+  const quantityInputCol = document.createElement("div");
+  quantityInputCol.classList.add("col");
 
-  const inputQuantity = document.createElement("input");
-  inputQuantity.type = "number";
-  inputQuantity.name = "quantity[]";
-  inputQuantity.placeholder = "Quantity";
-  inputQuantity.classList.add("form-control");
-  inputQuantity.required = true;
+  const quantityInput = document.createElement("input");
+  quantityInput.type = "number";
+  quantityInput.name = "quantity[]";
+  quantityInput.placeholder = "Quantity";
+  quantityInput.classList.add("form-control");
+  quantityInput.required = true;
 
-  inputQuantityCol.appendChild(inputQuantity);
+  quantityInputCol.appendChild(quantityInput);
 
   const deleteButtonCol = document.createElement("div");
   deleteButtonCol.classList.add("col-auto");
@@ -39,17 +40,17 @@ function tambahMaterialUpdate() {
         </svg>`;
 
   deleteButton.addEventListener("click", () => {
-    container.removeChild(materialFormInput);
+    materialContainer.removeChild(materialFormRow);
     updateDeleteButtons();
   });
 
   deleteButtonCol.appendChild(deleteButton);
 
-  materialFormInput.appendChild(inputMaterialCol);
-  materialFormInput.appendChild(inputQuantityCol);
-  materialFormInput.appendChild(deleteButtonCol);
+  materialFormRow.appendChild(materialInputCol);
+  materialFormRow.appendChild(quantityInputCol);
+  materialFormRow.appendChild(deleteButtonCol);
 
-  container.appendChild(materialFormInput);
+  materialContainer.appendChild(materialFormRow);
 
   updateDeleteButtons();
 }
@@ -57,13 +58,13 @@ function tambahMaterialUpdate() {
 // Update Delete Button ------------------------------------------------------------------------------------------------------------------------------------------------
 
 function updateDeleteButtons() {
-  const deleteButtons = document.querySelectorAll(
+  const deleteButtonElements = document.querySelectorAll(
     "#materialContainer .btn.btn-danger"
   );
-  if (deleteButtons.length === 1) {
-    deleteButtons[0].style.display = "none";
+  if (deleteButtonElements.length === 1) {
+    deleteButtonElements[0].style.display = "none";
   } else {
-    deleteButtons.forEach((button) => {
+    deleteButtonElements.forEach((button) => {
       button.style.display = "block";
     });
   }
@@ -71,11 +72,11 @@ function updateDeleteButtons() {
 
 // Cek Material Form ---------------------------------------------------------------------------------------------------------------------------------------------------
 function validateMaterials() {
-  const materials = document.querySelectorAll('input[name="material[]"]');
-  const quantities = document.querySelectorAll('input[name="quantity[]"]');
+  const materialInputs = document.querySelectorAll('input[name="material[]"]');
+  const quantityInputs = document.querySelectorAll('input[name="quantity[]"]');
 
-  for (let i = 0; i < materials.length; i++) {
-    if (materials[i].value && quantities[i].value) {
+  for (let i = 0; i < materialInputs.length; i++) {
+    if (materialInputs[i].value && quantityInputs[i].value) {
       return true;
     }
   }
@@ -99,15 +100,15 @@ async function cekProjectName(projectName) {
     const projects = data.dataProject; // Asumsikan properti ini menyimpan daftar proyek
 
     // Logging data proyek untuk debugging
-    console.log("Projects data from API:", projects);
+    // console.log("Projects data from API:", projects);
 
     // Filter proyek berdasarkan nama proyek yang diberikan
     const filteredProject = projects.find(
-      (project) => project.project_name === projectName
+      (project) => project.project === projectName
     );
 
     if (filteredProject) {
-      console.log("Project found:", filteredProject);
+      // console.log("Project found:", filteredProject);
       // Lakukan sesuatu dengan data proyek yang ditemukan
       return filteredProject;
     } else {
@@ -117,16 +118,6 @@ async function cekProjectName(projectName) {
   } catch (error) {
     console.error("Error fetching project data:", error);
     return null;
-  }
-}
-
-async function populateProjectFields(projectName) {
-  const project = await cekProjectName(projectName);
-  if (project) {
-    document.getElementById("project_id_old").value = project.project_id;
-    document.getElementById("pelanggan_id_old").value = project.pelanggan_id;
-  } else {
-    console.log("Project not found");
   }
 }
 
@@ -169,14 +160,33 @@ async function showEditForm(deliveryId) {
       cancelButtonText: "Cancel",
       focusConfirm: false,
       didOpen: async () => {
-        await populateSelect(); // Populate select options
-
-        // Menggabungkan logika populateSelectPICEdit di sini
         var people = [];
+        var projects = [];
         var nameInput = document.getElementById('pic');
         var phoneInput = document.getElementById('phone');
+        var projectInput = document.getElementById('project');
+        var deliverToInput = document.getElementById('deliverTo');
         var suggestions = document.getElementById('suggestions');
+        var suggestionProject = document.getElementById('suggestionProject');
 
+        // Fetch project data
+        try {
+          const projectResponse = await fetch('https://apiddim.booq.id/project', {
+            headers: {
+                'Authorization': 'Bearer DpacnJf3uEQeM7 HN'
+            }
+          });
+          const projectData = await projectResponse.json();
+          projects = projectData.dataProject.map(project => ({
+            projectName: project.project_name,
+            deliverTo: project.client
+          }));
+          // console.log("Project data fetched:", projects);
+        } catch (error) {
+          console.error('Error fetching project data:', error);
+        }
+
+        // Fetch PIC data
         try {
             const response = await fetch('https://apiddim.booq.id/data/pic', {
                 headers: {
@@ -188,57 +198,56 @@ async function showEditForm(deliveryId) {
                 name: person.pic,
                 phone: person.pic_phone
             }));
-            console.log("Data fetched:", people);
+            // console.log("PIC data fetched:", people);
         } catch (error) {
-            console.error('Error fetching data:', error);
+            console.error('Error fetching PIC data:', error);
         }
 
-        if (!nameInput || !phoneInput || !suggestions) {
+        if (!nameInput || !phoneInput || !suggestions || !projectInput || !deliverToInput) {
           console.error("Required input elements not found.");
           return;
         }
 
+        // Set default values
+        document.getElementById('pic').value = data.data[0].pic;
+        document.getElementById('phone').value = data.data[0].pic_phone;
+        document.getElementById('project').value = data.data[0].project;
+        document.getElementById('deliverTo').value = data.data[0].customer;
         document.getElementById("tanggal").value = formattedDate;
         document.getElementById("formatNo").value = data.data[0].no_dn;
-        document.getElementById("old_picView").value = `${data.data[0].pic} - (PIC Sebelumnya )`;
-        document.getElementById("old_pic").value = data.data[0].pic;
-        document.getElementById("old_pic_phone").value = data.data[0].pic_phone;
-        document.getElementById(
-          "oldProjectName"
-        ).value = `${data.data[0].project_name} - (Project Sebelumnya)`;
 
-        // Sebelum datanya di tampilkan harus cek dulu value project_name
-        await populateProjectFields(data.data[0].project_name);
-
+        // Handle material details
         materialDetails.forEach((detail) => {
           tambahMaterialUpdate();
-          const materials = document.querySelectorAll(
-            'input[name="material[]"]'
-          );
-          const quantities = document.querySelectorAll(
-            'input[name="quantity[]"]'
-          );
-          materials[materials.length - 1].value = detail.material;
-          quantities[quantities.length - 1].value = detail.quantity;
+          const materialInputs = document.querySelectorAll('input[name="material[]"]');
+          const quantityInputs = document.querySelectorAll('input[name="quantity[]"]');
+          materialInputs[materialInputs.length - 1].value = detail.material;
+          quantityInputs[quantityInputs.length - 1].value = detail.quantity;
         });
 
-        const projectSelect = document.getElementById("project");
-        const selectedOption = projectSelect.querySelector(
-          `option[value="${data.data[0].project_id}"]`
-        );
-        if (selectedOption) {
-          selectedOption.selected = true;
-        }
+        // Populate project fields and add event listener for autocomplete
+        projectInput.addEventListener('input', function () {
+          const query = projectInput.value.toLowerCase();
+          suggestionProject.innerHTML = '';
+          if (query) {
+            const filteredProjects = projects.filter(project =>
+              project.projectName.toLowerCase().includes(query)
+            );
+            filteredProjects.forEach(project => {
+              const suggestionItem = document.createElement('div');
+              suggestionItem.classList.add('suggestion-item', 'list-group-item');
+              suggestionItem.textContent = project.projectName;
+              suggestionItem.addEventListener('click', function () {
+                projectInput.value = project.projectName;
+                deliverToInput.value = project.deliverTo;
+                suggestionProject.innerHTML = '';
+              });
+              suggestionProject.appendChild(suggestionItem);
+            });
+          }
+        });
 
-        // Add event listener to the "Add Material" button
-        document
-          .getElementById("materialButton")
-          .addEventListener("click", tambahMaterialUpdate);
-
-        // Update delete button visibility based on number of material items
-        updateDeleteButtons();
-
-
+        // Populate PIC fields and add event listener for autocomplete
         nameInput.addEventListener('input', function() {
           var query = nameInput.value.toLowerCase();
           suggestions.innerHTML = '';
@@ -258,57 +267,27 @@ async function showEditForm(deliveryId) {
                   suggestions.appendChild(div);
               });
           }
-      });
+        });
 
-      document.getElementById('searchForm').addEventListener('submit', function(event) {
-          event.preventDefault();
-          var selectedName = nameInput.value;
-          var phoneNumber = phoneInput.value;
-          Swal.fire({
-              title: 'Are you sure?',
-              text: `Selected or Added Name: ${selectedName}, Phone Number: ${phoneNumber}`,
-              icon: 'question',
-              showCancelButton: true,
-              confirmButtonText: 'Submit',
-              cancelButtonText: 'Cancel'
-          }).then((result) => {
-              if (result.isConfirmed) {
-                  var personExists = people.some(function(person) {
-                      return person.name === selectedName;
-                  });
-                  if (!personExists) {
-                      people.push({name: selectedName, phone: phoneNumber});
-                  }
-                  Swal.fire('Submitted!', `Name: ${selectedName}, Phone: ${phoneNumber}`, 'success');
-                  nameInput.value = '';
-                  phoneInput.value = '';
-                  suggestions.innerHTML = '';
-              }
-          });
-      });
-
-      document.addEventListener('click', function(event) {
+        document.addEventListener('click', function(event) {
           if (!event.target.closest('#pic') && !event.target.closest('#suggestions')) {
               suggestions.innerHTML = '';
           }
-      });
+          if (!event.target.closest('#project') && !event.target.closest('#suggestionProject')) {
+              suggestionProject.innerHTML = '';
+          }
+        });
+
       },
       preConfirm: async () => {
         // Validasi inputan user sebelum update
-        const projectId = Swal.getPopup().querySelector("#project").value;
-        const pelangganId = Swal.getPopup().querySelector("#pelanggan_id").value;
-        const project_id_old = Swal.getPopup().querySelector("#project_id_old").value;
-        const pelanggan_id_old = Swal.getPopup().querySelector("#pelanggan_id_old").value;
-
+        const project = Swal.getPopup().querySelector("#project").value;
         const pic = Swal.getPopup().querySelector("#pic").value;
         const phone = Swal.getPopup().querySelector("#phone").value;
-        const oldPic = Swal.getPopup().querySelector("#old_pic").value;
-        const oldPhone = Swal.getPopup().querySelector("#old_pic_phone").value;
-
         const prefix = Swal.getPopup().querySelector("#prefix").value;
         const tanggal = Swal.getPopup().querySelector("#tanggal").value;
         const formatNo = Swal.getPopup().querySelector("#formatNo").value;
-        const deliverTo = Swal.getPopup().querySelector("#deliverTo").value;
+        const pelanggan = Swal.getPopup().querySelector("#deliverTo").value;
 
         if (!validateMaterials()) {
           Swal.showValidationMessage(
@@ -317,7 +296,7 @@ async function showEditForm(deliveryId) {
           return false;
         }
 
-        if (!projectId && !project_id_old) {
+        if (!project) {
           Swal.showValidationMessage("Project is required");
           return false;
         }
@@ -325,38 +304,37 @@ async function showEditForm(deliveryId) {
           Swal.showValidationMessage("Date is required");
           return false;
         }
-        if (!pic && !oldPic) {
+        if (!pic) {
           Swal.showValidationMessage("PIC is required");
           return false;
         }
-        if (!phone && !oldPhone) {
+        if (!phone) {
           Swal.showValidationMessage("Phone is required");
           return false;
         }
 
-        const materials = Swal.getPopup().querySelectorAll('input[name="material[]"]');
-        const quantities = Swal.getPopup().querySelectorAll('input[name="quantity[]"]');
+        const materialInputs = Swal.getPopup().querySelectorAll('input[name="material[]"]');
+        const quantityInputs = Swal.getPopup().querySelectorAll('input[name="quantity[]"]');
 
-        const materialDetails = [];
-        for (let i = 0; i < materials.length; i++) {
-          if (materials[i].value && quantities[i].value) {
-            materialDetails.push({
-              material: materials[i].value,
-              quantity: quantities[i].value,
+        const updatedMaterialDetails = [];
+        for (let i = 0; i < materialInputs.length; i++) {
+          if (materialInputs[i].value && quantityInputs[i].value) {
+            updatedMaterialDetails.push({
+              material: materialInputs[i].value,
+              quantity: quantityInputs[i].value,
             });
           }
         }
 
         const updatedData = {
-          project_id: projectId || project_id_old,
-          pelanggan_id: pelangganId || pelanggan_id_old,
+          project: project,
+          pelanggan: pelanggan,
           prefix: prefix,
           date: tanggal,
           no_dn: formatNo,
-          pic: pic || oldPic,
-          pic_phone: phone || oldPhone,
-          client: deliverTo || data.data[0].client,
-          material_detail: materialDetails,
+          pic: pic,
+          pic_phone: phone,
+          material_detail: updatedMaterialDetails,
         };
 
         try {
@@ -399,15 +377,3 @@ document.querySelectorAll(".edit-btn").forEach((button) => {
     showEditForm(deliveryId);
   });
 });
-
-function validateMaterials() {
-  const materials = document.querySelectorAll('input[name="material[]"]');
-  const quantities = document.querySelectorAll('input[name="quantity[]"]');
-  
-  for (let i = 0; i < materials.length; i++) {
-    if (!materials[i].value || !quantities[i].value) {
-      return false;
-    }
-  }
-  return true;
-}

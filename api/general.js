@@ -3,7 +3,7 @@ let params = new URLSearchParams(queryString);
 
 let page = params.get("page");
 
-const token = "DpacnJf3uEQeM7HN1";
+const token = "DpacnJf3uEQeM7 HN";
 
 // Just Tes -------------------------------------------------------
 const token2Tes = "DpacnJf3uEQeM7HN";
@@ -81,7 +81,14 @@ let deleteDeliveryNote = `${baseUrl}/delete/delivery/note/`; //setting ke PUT
 
 let lastNumberDelivery = `${baseUrl}/lastnumber/delivery/note`; //new API lastnumber Delivery note
 
-// --------------------------------------------------------------------------------------------------------
+// Bank Guarantee ----------------------------------------------------------------------------------------
+
+let getBgData = `${baseUrl}/bank/guarantee`;
+let addBgData = `${baseUrl}/bank/guarantee`;
+let updateBgData = `${baseUrl}/update/bank/guarantee`;
+let deleteBgData = `${baseUrl}/delete/bank/guarantee`
+
+// -------------------------------------------------------------------------------------------------------
 
 let purchaseOrder = `${baseUrl}/purchase/order`;
 let lastNumberPo = `${baseUrl}/lastnumber/purchase/order`;
@@ -95,3 +102,7 @@ let addLetter = `${baseUrl}/add/letter`;
 let letterData = `${baseUrl}/data/letter`;
 let letterDelete = `${baseUrl}/delete/letter`;
 let letterUpdate = `${baseUrl}/update/letter`;
+
+let getLetterDoc = `${baseUrl}/document/letter`
+let addLetterFolder = `${baseUrl}/folder/letter`
+let addLetterFile = `${baseUrl}/file/letter`

@@ -81,20 +81,38 @@
   background-color: #f5f5f5;
 }
 
-/* Sugest */
-#suggestions {
-  border: 1px solid #ccc;
+/* Suggest Project */
+#suggestionProject {
+  border-radius: 2%;
   max-height: 150px;
   overflow-y: auto;
   position: absolute;
   z-index: 1000;
-  width: 100%;
-  background-color: white;
+  width: 89%;
+  background-color: #f3f3f3;
 }
 .suggestion-item {
   padding: 10px;
   cursor: pointer;
 }
 .suggestion-item:hover {
-  background-color: #e9ecef;
+  background-color: #e9ecefe2;
+}
+
+/* Sugest */
+#suggestions {
+  border-radius: 2%;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 1000;
+  width: 89%;
+  background-color: #f3f3f3;
+}
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+}
+.suggestion-item:hover {
+  background-color: #e9ecefe2;
 }

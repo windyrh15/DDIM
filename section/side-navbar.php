@@ -12,13 +12,19 @@ $project_expanses = ($page == "finance/project_expanses") ? "active" : false;
 $operational_expanses = ($page == "finance/operational_expanses") ? "active" : false;
 $cashflow_report = ($page == "finance/cashflow_report") ? "active" : false;
 
-$admin = ($page == "admin/employe" || $page == "admin/purchase_order" || $page == "admin/client" || $page == "admin/vendor" || $page == "admin/official_letter" || $page == "admin/delivery_note" || $page == "admin/bank_guarantee") ? "active" : false;
+// Ops Activity (in progress)
+$admin = ($page == "admin/employe" || $page == "admin/purchase_order" || $page == "admin/client" || $page == "admin/vendor" || $page == "admin/official_letter" || $page == "admin/delivery_note" || $page == "admin/bank_guarantee" || $page == "admin/ops_activity" ) ? "active" : false;
+
 $employe = ($page == "admin/employe") ? "active" : false;
 $client = ($page == "admin/client") ? "active" : false;
 $vendor = ($page == "admin/vendor") ? "active" : false;
 $purchase_order = ($page == "admin/purchase_order") ? "active" : false;
 $official_letter = ($page == "admin/official_letter") ? "active" : false;
 $delivery_note = ($page == "admin/delivery_note") ? "active" : false;
+
+// OpsActivity (in Progress)
+$ops_activity = ($page == "admin/ops_activity") ? "active" : false;
+
 $bank_guarantee = ($page == "admin/bank_guarantee") ? "active" : false;
 
 $purchasing = ($page == "purchasing/asset" || $page == "purchasing/product" || $page == "purchasing/inventory") ? "active" : false;
@@ -67,14 +73,11 @@ $setting = ($page == "setting") ? "active" : false;
           <li class="' . $client . '"><a class="nav-link" href="?page=admin/client">Client</a></li>
           <li class="' . $vendor . '"><a class="nav-link" href="?page=admin/vendor">Vendor</a></li>
           <li class="' . $purchase_order . '"><a class="nav-link" href="?page=admin/purchase_order">Purchase Order</a></li>
-          <li class="dropdown">
-            <a href="#" class="nav-link has-dropdown">Ops Activity</a>
-            <ul class="dropdown-menu">
-              <li class="' . $official_letter . '"><a class="nav-link" href="?page=admin/official_letter">Official Letter</a></li>
-              <li class="' . $delivery_note . '"><a class="nav-link" href="?page=admin/delivery_note">Delivery Note</a></li>
-              <li class="' . $bank_guarantee . '"><a class="nav-link" href="?page=admin/bank_guarantee">Bank Guarantee</a></li>
-            </ul>
-          </li>
+
+
+          <li class="' . $ops_activity . '"><a class="nav-link" href="?page=admin/ops_activity">Ops Activity</a></li>
+
+          
         </ul>
       </li>
       <li class="dropdown ' . $purchasing . '">

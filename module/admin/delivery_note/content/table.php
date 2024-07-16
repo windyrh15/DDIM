@@ -3,19 +3,19 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header d-flex justify-content-between">
-          <form>
+          <form id="search-form">
             <div class="input-group">
               <input type="text" id="search-input" class="form-control" placeholder="Search">
             </div>
           </form>
-          <div class="card-header-action">
-            <a href='#' id="inputButton" data-bs-toggle="modal" data-bs-target="#inputModal" class='btn btn-danger ml-auto <?= $tPc; ?>'>
+          <div class="card-header-action" id="add-note-button">
+            <a href='#' id="inputButton" data-bs-toggle="modal" data-bs-target="#inputModal" class='btn btn-danger ml-auto'>
               <i class='fas fa-shopping-cart fa-xl text-white-50'></i> Add Delivery Note
             </a>
           </div>
         </div>
         <div class="card-body p-4">
-          <div class="table-responsive">
+          <div class="table-responsive" id="table-section">
             <table class="table table-striped table-bordered" id="deliveryNote">
               <thead class="bg-warna">
                 <tr class="ta-center">
@@ -33,16 +33,18 @@
               <tbody>
               </tbody>
             </table>
-            <!-- pagination pc -->
             <div class="d-none d-md-block d-lg-block mb-3">
               <div id="pagination-container-pc" class="pagination-custom">
               </div>
             </div>
-            <!-- pagination mobile -->
             <div class="d-block d-md-none d-lg-none mb-3">
               <div id="pagination-container-mobile" class="pagination-custom">
               </div>
             </div>
+          </div>
+          <div id="details-section" class="card mt-4 p-4" style="display: none;">
+            <button class="close" id="close-button" style="position: absolute; top: 10px; right: 20px;">&times;</button>
+            <div id="detail-content"></div>
           </div>
         </div>
       </div>

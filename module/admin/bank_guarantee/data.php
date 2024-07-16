@@ -1,9 +1,9 @@
 <div class="section-header">
-            <h1>Purchase Order</h1>
+            <h1>Bank Guarantee</h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="index.php">DDiM</a></div>
               <div class="breadcrumb-item"><a href="#">Admin</a></div>
-              <div class="breadcrumb-item">Purchase Order</div>
+              <div class="breadcrumb-item">Bank Guarantee</div>
             </div>
           </div>
 

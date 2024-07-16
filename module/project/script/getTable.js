@@ -7,6 +7,9 @@ const searchInput = document.querySelector("#search-input");
 const pageSize = 10;
 let currentPage = 1;
 
+
+// Display Data ---------------------------------------------------------------------------------------------
+
 function displayData(
   page,
   searchQuery = "",
@@ -166,6 +169,9 @@ function displayData(
   createPaginationButtonsMobile(totalPages);
 }
 
+
+// createPaginationButtonPc ---------------------------------------------------------------------------------------------
+
 function createPaginationButtonsPC(totalPages) {
   const paginationContainer = document.querySelector(
     "#pagination-container-pc"
@@ -218,6 +224,7 @@ function createPaginationButtonsPC(totalPages) {
   paginationContainer.appendChild(lastButton);
 }
 
+// createPaginationButtonMobile ---------------------------------------------------------------------------------------
 function createPaginationButtonsMobile(totalPages) {
   const paginationContainer = document.querySelector(
     "#pagination-container-mobile"
@@ -283,6 +290,7 @@ function createPaginationButtonsMobile(totalPages) {
 //     .catch((error) => console.error("Error fetching data:", error));
 // }
 
+// FetchingData ------------------------------------------------------------------------------------------------------
 
 function fetchData() {
   // Show loading spinner
@@ -333,6 +341,8 @@ searchInput.addEventListener("input", () => {
 
 fetchData();
 
+// showDetailsProject ------------------------------------------------------------------------------------------------
+
 function showDetailsProject(projectId) {
   var detailDataProject = getDetailDataProject(projectId);
 
@@ -365,6 +375,8 @@ function showDetailsProject(projectId) {
   $("#detailsModalProject").modal("show");
 }
 
+// getDetailDataProject ---------------------------------------------------------------------------------------------
+
 function getDetailDataProject(projectId) {
   console.log("All Project:", dataProject.dataProject);
   const foundProject = dataProject.dataProject.find(
@@ -375,7 +387,7 @@ function getDetailDataProject(projectId) {
   return foundProject || {};
 }
 
-
+// ProjectPm --------------------------------------------------------------------------------------------------------
 async function projectPm() {
   try {
     const response = await fetch(dataPm, {
@@ -406,7 +418,7 @@ async function projectPm() {
   }
 }
 
-
+// EditPm -----------------------------------------------------------------------------------------------------
 
 async function EditPm (projectId) {
   try {
@@ -465,9 +477,13 @@ async function EditPm (projectId) {
 
 let currentProjectId;
 
+// showDetails -----------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------
 function showDetails(Id) {
   detailProject.style.display = "block";
-  contentProject.style.display = "none";
+  // contentProject.style.display = "none";
+  contentProject.style.display = "block";
   updateDetailProject(Id);
   updateVendor(Id);
   updateDoc(Id);
@@ -476,12 +492,16 @@ function showDetails(Id) {
   checkProjectCancel(Id);
   currentProjectId = Id;
 }
-// Control Perpindahan Halaman
+// -----------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------
+// Control Perpindahan Halaman -------------------------------------------------------------------------------
 function backtotable() {
   detailProject.style.display = "none";
   contentProject.style.display = "block";
 }
 
+// updateDetailProject ---------------------------------------------------------------------------------------
 function updateDetailProject(Id) {
     
   const tbody = document.querySelector("#tableDetailProject tbody");
@@ -537,6 +557,8 @@ function updateDetailProject(Id) {
       tbody.appendChild(errorRow);
     });
 }
+
+// updateDoc --------------------------------------------------------------------------------------------------------
 
 function updateDoc(Id) {
 
@@ -654,6 +676,7 @@ function updateDoc(Id) {
     });
 }
 
+// uploadFile ------------------------------------------------------------------------------------------------
 
 async function uploadFile(projectId, folderId) {
   // Tampilkan sweet alert untuk mengunggah file
@@ -722,6 +745,8 @@ async function uploadFile(projectId, folderId) {
   }
 }
 
+// updateVendor ---------------------------------------------------------------------------------------------
+
 function updateVendor(Id) {
   const tbody = document.querySelector("#vendor tbody");
   
@@ -776,6 +801,7 @@ function updateVendor(Id) {
     });
 }
 
+// updateLogPayment ------------------------------------------------------------------------------------------
 
 function updateLogPayment(Id) {
     
@@ -836,6 +862,7 @@ function updateLogPayment(Id) {
     });
 }
 
+// addFolder --------------------------------------------------------------------------------------------------
 
 addFolder.addEventListener("click", async function () {
   try {
@@ -892,6 +919,8 @@ addFolder.addEventListener("click", async function () {
   }
 });
 
+// EditFolder ------------------------------------------------------------------------------------------------
+
 async function editFolder(Id) {
   try {
     const response = await fetch("module/" + page + "/modal/addFolder.php");
@@ -946,6 +975,7 @@ async function editFolder(Id) {
   }
 };
 
+// DeleteFile ----------------------------------------------------------------------------------------
 
 async function deleteFile(Id) {
   try {
@@ -987,6 +1017,8 @@ async function deleteFile(Id) {
   }
 };
 
+// detailAccount ------------------------------------------------------------------------------------------
+
 async function detailAccount() {
   try {
     const response = await fetch(accountFinance, {
@@ -1009,6 +1041,8 @@ async function detailAccount() {
     console.error("Error fetching project data:", error);
   }
 }
+
+// detailCategory -------------------------------------------------------------------------------------------
 
 async function detailCategory() {
   try {
@@ -1033,6 +1067,8 @@ async function detailCategory() {
   }
 }
 
+// detailDescription ----------------------------------------------------------------------------------------
+
 async function detailDescription(catType) {
   try {
     const response = await fetch(`${categoryFinance}/${catType}`, {
@@ -1056,6 +1092,8 @@ async function detailDescription(catType) {
   }
 }
 
+// FormatAmount ----------------------------------------------------------------------------------------------
+
 async function formatAmount(){
 // Mendengarkan event input pada elemen input amount
 document.getElementById("jumlah_transaksi").addEventListener("input", function() {
@@ -1070,6 +1108,7 @@ document.getElementById("jumlah_transaksi").addEventListener("input", function()
 });
 }
 
+// AddExpenses ------------------------------------------------------------------------------------------------
 
 addExpenses.addEventListener("click", async function () {
   try {
@@ -1162,6 +1201,8 @@ addExpenses.addEventListener("click", async function () {
   }
 });
 
+// checkProjectCancel --------------------------------------------------------------------------------------
+
 async function checkProjectCancel(Id) {
   try {
     const response = await fetch(`${projectData}/${Id}`, {
@@ -1188,6 +1229,8 @@ async function checkProjectCancel(Id) {
     console.error("Error fetching project data:", error);
   }
 }
+
+// cancelProjectHandler ------------------------------------------------------------------------------------
 
 async function cancelProjectHandler() {
   Swal.fire({
@@ -1236,6 +1279,8 @@ async function cancelProjectHandler() {
     });
 }
 
+// DeleteProjectHandler ------------------------------------------------------------------------------------
+
 async function deleteProjectHandler() {
   Swal.fire({
     title: "Delete Project",
@@ -1283,6 +1328,8 @@ async function deleteProjectHandler() {
     });
 }
 
+// checkProjectFinishdate ----------------------------------------------------------------------------------
+
 async function checkProjectFinishDate(Id) {
   try {
     const response = await fetch(`${projectData}/${Id}`, {
@@ -1309,6 +1356,8 @@ async function checkProjectFinishDate(Id) {
     console.error("Error fetching project data:", error);
   }
 }
+
+// finishProjectHandler -------------------------------------------------------------------------------------
 
 async function finishProjectHandler() {
   Swal.fire({

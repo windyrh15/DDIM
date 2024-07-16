@@ -5,6 +5,9 @@ const version = `${url}?v=${customTime}`;
 const tbody = document.querySelector("#official_letter tbody");
 const searchInput = document.querySelector("#search-input");
 const pageSize = 10;
+
+console.log(data)
+
 let currentPage = 1;
 
 function displayData(

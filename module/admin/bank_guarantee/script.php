@@ -20,10 +20,10 @@ if ($detail) {
 } else {
   $getTable = filemtime("module/" . $page . "/script/getTable.js");
   $getVendor = filemtime("module/" . $page . "/script/getVendor.js");
-  $inputPo = filemtime("module/" . $page . "/script/inputPo.js");
+  $input = filemtime("module/" . $page . "/script/input.js");
   echo "
     <script src='module/$page/script/getTable.js?v=$getTable'></script>
     <script src='module/$page/script/getVendor.js?v=$getVendor'></script>
-    <script src='module/$page/script/inputPo.js?v=$inputPo'></script>
+    <script src='module/$page/script/input.js?v=$input'></script>
     ";
 }

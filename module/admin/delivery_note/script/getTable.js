@@ -1,12 +1,14 @@
-// Still using dummyData --------------------------------
-
 // Props --------------------------------------------------------------------------------
 let data;
-// const url = deliveryNote;
 const customTime = new Date().getTime();
-// const versionDn = `${url}?v=${customTime}`;
 const tbody = document.querySelector("#deliveryNote tbody");
 const searchInput = document.querySelector("#search-input");
+const searchForm = document.querySelector("#search-form");
+const addNoteButton = document.querySelector("#add-note-button");
+const tableSection = document.querySelector("#table-section");
+const detailsSection = document.querySelector("#details-section");
+const detailContent = document.querySelector("#detail-content");
+const closeButton = document.querySelector("#close-button");
 const pageSize = 10;
 let currentPage = 1;
 
@@ -25,7 +27,6 @@ function displayData(
   const startIdx = (currentPage - 1) * pageSize;
   const endIdx = startIdx + pageSize;
   const filteredData = data.data.filter((delNote) => {
-    // Filter data berdasarkan pencarian (jika ada)
     const userMatched =
       filterUser === "" ||
       delNote.nama.toLowerCase() === filterUser.toLowerCase();
@@ -60,17 +61,21 @@ function displayData(
       searchMatched
     );
   });
+
   const totalPages = Math.ceil(filteredData.length / pageSize);
   const paginatedData = filteredData.slice(startIdx, endIdx);
   tbody.innerHTML = "";
   let i = startIdx + 1;
   paginatedData.forEach((data) => {
     const row = document.createElement("tr");
-    // row.onclick = function () {
-    //   showDetails(data.delivery_id);
-    // };
+    
+    // Tambahkan event listener untuk seluruh baris kecuali kolom Action
+    row.addEventListener('click', function(event) {
+      if (!event.target.closest('.action-column')) {
+        showDetails(data);
+      }
+    });
 
-    // Buat elemen untuk material_detail
     let materialDetails = "";
     data.material_detail.forEach((material) => {
       materialDetails += `
@@ -85,12 +90,12 @@ function displayData(
             <td class="d-none d-md-table-cell ta-center">${i}</td>
             <td class="d-none d-md-table-cell ta-start">${data.date}</td>
             <td class="d-none d-md-table-cell ta-start">${materialDetails}</td>
-            <td class="d-none d-md-table-cell ta-start">${data.project_name}</td>
+            <td class="d-none d-md-table-cell ta-start">${data.project}</td>
             <td class="d-none d-md-table-cell ta-end">${data.customer}</td>
             <td class="d-none d-md-table-cell ta-start">${data.no_dn}</td>
             <td class="d-none d-md-table-cell ta-start">${data.pic}</td>
             <td class="d-none d-md-table-cell ta-start">${data.pic_phone}</td>
-            <td class="d-none d-sm-table-cell ta-center">
+            <td class="d-none d-sm-table-cell ta-center action-column">
               <center><div class="dropdown no-arrow mb-4">
             <button class="btn btn-primary dropdown-toggle mt-4" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Action
@@ -98,7 +103,7 @@ function displayData(
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item info-btn text-info" onclick="showEditForm(${data.delivery_id})">Edit</a>
               <a class="dropdown-item delete-btn text-danger" onclick="deleteDelNote(${data.delivery_id})">Delete</a>
-            </div>
+            </div> 
             </div></center>
           </td>
         `;
@@ -107,6 +112,39 @@ function displayData(
   });
   createPaginationButtonsPC(totalPages);
   createPaginationButtonsMobile(totalPages);
+}
+
+function showDetails(data) {
+  searchForm.style.display = 'none';
+  addNoteButton.style.display = 'none';
+  tableSection.style.display = 'none';
+  detailsSection.style.display = 'block';
+  detailContent.innerHTML = `
+    <h3>${data.project_name}</h3>
+    <p><strong>Date:</strong> ${data.date}</p>
+    <p><strong>Customer:</strong> ${data.customer}</p>
+    <p><strong>Format No:</strong> ${data.no_dn}</p>
+    <p><strong>PIC:</strong> ${data.pic}</p>
+    <p><strong>Phone:</strong> ${data.pic_phone}</p>
+    <h4>Material Details</h4>
+    ${data.material_detail.map(material => `
+      <ul>
+        <li>Quantity: ${material.quantity}</li>
+        <li>Material: ${material.material}</li>
+      </ul>
+    `).join('')}
+  `;
+}
+
+closeButton.addEventListener("click", () => {
+  closeDetails();
+});
+
+function closeDetails() {
+  searchForm.style.display = 'flex';
+  addNoteButton.style.display = 'block';
+  tableSection.style.display = 'block';
+  detailsSection.style.display = 'none';
 }
 
 // CreatePaginationButtonsPC -----------------------------------------------------------------------------
@@ -163,7 +201,6 @@ function createPaginationButtonsPC(totalPages) {
 }
 
 // CreatePaginationButtonMobile ---------------------------------------------------------------
-
 function createPaginationButtonsMobile(totalPages) {
   const paginationContainer = document.querySelector(
     "#pagination-container-mobile"
@@ -219,7 +256,6 @@ function createPaginationButtonsMobile(totalPages) {
 
 // FetchData ----------------------------------------------------------------------------------
 function fetchData() {
-  // Show loading spinner
   const loadingRow = document.createElement("tr");
   loadingRow.innerHTML = `
     <td colspan="9" class="text-center">
@@ -230,20 +266,13 @@ function fetchData() {
   tbody.innerHTML = "";
   tbody.appendChild(loadingRow);
 
-  fetch(
-    // './api/delidummy.json'
-    deliveryNote,
-    {
-      headers: headers,
-    }
-  )
+  fetch(deliveryNote, { headers: headers })
     .then((response) => response.json())
     .then((responseData) => {
-      tbody.innerHTML = ""; // Clear the loading row
+      tbody.innerHTML = "";
       data = responseData;
-      console.log(data);
+      
       if (data.data.length === 0) {
-        // Show "No data available" if no data
         const row = document.createElement("tr");
         row.innerHTML = `
           <td colspan="9" class="text-center">No data available</td>
@@ -254,10 +283,8 @@ function fetchData() {
       }
     })
     .catch((error) => {
-      tbody.innerHTML = ""; // Clear the loading row
+      tbody.innerHTML = "";
       console.error("Error fetching data:", error);
-
-      // Show "Problems with the API" if there is an error
       const errorRow = document.createElement("tr");
       errorRow.innerHTML = `
         <td colspan="9" class="text-center">Problems with the API</td>`;
@@ -270,5 +297,3 @@ searchInput.addEventListener("input", () => {
 });
 
 fetchData();
-
-// ----------------------------------------------------------------------------------------------------
