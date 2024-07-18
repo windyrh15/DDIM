@@ -9,7 +9,7 @@ session_start();
 
 <!-- pilih project -->
 <input type="text" id="project" class="swal2-input form-add" placeholder="Search or Add new Project">   
-<div id="suggestionProject" class="suggestions-container"></div>
+<div id="suggestionProject" class="suggestion suggestions-container"></div>
 
 <!-- DeliverTo -->
 <input type="text" name="deliverTo" id="deliverTo" autocomplete="off" placeholder="Delivery To" class="swal2-input form-add" required>
@@ -20,7 +20,7 @@ session_start();
 <!-- Bagian PIC dan Phone harus punya sugest ----------------------------------------------------------------------------------------- -->
 
 <input type="text" id="pic" class="swal2-input form-add" placeholder="Search or Add new PIC">
-<div id="suggestions"></div>
+<div id="suggestionsPic" class="suggestion suggestions-container"></div>
 
 <input type="text" id="phone" class="swal2-input form-add" placeholder="Enter phone number">
 

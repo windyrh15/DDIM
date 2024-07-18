@@ -121,13 +121,105 @@ async function cekProjectName(projectName) {
   }
 }
 
+async function populateSelectUpdate() {
+  var projects = [];
+  var people = [];
+
+  try {
+      // Fetch project data
+      const projectResponse = await fetch(projectData, {
+          headers: headers
+      });
+      const projectResponseData = await projectResponse.json();
+      projects = projectResponseData.dataProject.map(project => ({
+          name: project.project_name,
+          client: project.client
+      }));
+
+      // Fetch PIC data
+      const picResponse = await fetch(picData, {
+          headers: headers
+      });
+      const picResponseData = await picResponse.json();
+      people = picResponseData.data.map(person => ({
+          name: person.pic,
+          phone: person.pic_phone
+      }));
+  } catch (error) {
+      console.error('Error fetching data:', error);
+  }
+
+  // Populate project input
+  var projectInput = document.getElementById('project');
+  var deliverToInput = document.getElementById('deliverTo');
+  var suggestionProject = document.getElementById('suggestionProject');
+
+  projectInput.addEventListener('input', function() {
+      var query = projectInput.value.toLowerCase();
+      suggestionProject.innerHTML = '';
+      if (query) {
+          var filteredProjects = projects.filter(function(project) {
+              return project.name.toLowerCase().includes(query);
+          });
+          filteredProjects.forEach(function(project) {
+              var div = document.createElement('div');
+              div.className = 'suggestion-item';
+              div.textContent = project.name + " (" + project.client + ")";
+              div.addEventListener('click', function() {
+                  projectInput.value = project.name;
+                  deliverToInput.value = project.client;
+                  suggestionProject.innerHTML = '';
+              });
+              suggestionProject.appendChild(div);
+          });
+      }
+  });
+
+  // Populate PIC input
+  var nameInput = document.getElementById('pic');
+  var phoneInput = document.getElementById('phone');
+  var suggestions = document.getElementById('suggestionsPic');
+
+  nameInput.addEventListener('input', function() {
+      var query = nameInput.value.toLowerCase();
+      suggestions.innerHTML = '';
+      if (query) {
+          var filteredPeople = people.filter(function(person) {
+              return person.name.toLowerCase().includes(query);
+          });
+          filteredPeople.forEach(function(person) {
+              var div = document.createElement('div');
+              div.className = 'suggestion-item';
+              div.textContent = person.name + " (" + person.phone + ")";
+              div.addEventListener('click', function() {
+                  nameInput.value = person.name;
+                  phoneInput.value = person.phone;
+                  suggestions.innerHTML = '';
+              });
+              suggestions.appendChild(div);
+          });
+      }
+  });
+
+  document.addEventListener('click', function(event) {
+      if (!event.target.closest('#project') && !event.target.closest('#suggestionProject')) {
+          suggestionProject.innerHTML = '';
+      }
+      if (!event.target.closest('#pic') && !event.target.closest('#suggestions')) {
+          suggestions.innerHTML = '';
+      }
+  });
+}
+
+// ShowEditForm -------------------------------------------------------------------------------------------------------------
+
 async function showEditForm(deliveryId) {
   try {
     const urlDeliveryNote = `${deliveryNote}${deliveryId}`;
 
     // Fetch current data from API
     const response = await fetch(urlDeliveryNote, {
-      headers: headersTes,
+      headers: headers,
     });
 
     if (!response.ok) {
@@ -160,54 +252,8 @@ async function showEditForm(deliveryId) {
       cancelButtonText: "Cancel",
       focusConfirm: false,
       didOpen: async () => {
-        var people = [];
-        var projects = [];
-        var nameInput = document.getElementById('pic');
-        var phoneInput = document.getElementById('phone');
-        var projectInput = document.getElementById('project');
-        var deliverToInput = document.getElementById('deliverTo');
-        var suggestions = document.getElementById('suggestions');
-        var suggestionProject = document.getElementById('suggestionProject');
-
-        // Fetch project data
-        try {
-          const projectResponse = await fetch('https://apiddim.booq.id/project', {
-            headers: {
-                'Authorization': 'Bearer DpacnJf3uEQeM7 HN'
-            }
-          });
-          const projectData = await projectResponse.json();
-          projects = projectData.dataProject.map(project => ({
-            projectName: project.project_name,
-            deliverTo: project.client
-          }));
-          // console.log("Project data fetched:", projects);
-        } catch (error) {
-          console.error('Error fetching project data:', error);
-        }
-
-        // Fetch PIC data
-        try {
-            const response = await fetch('https://apiddim.booq.id/data/pic', {
-                headers: {
-                    'Authorization': 'Bearer DpacnJf3uEQeM7HN'
-                }
-            });
-            const data = await response.json();
-            people = data.data.map(person => ({
-                name: person.pic,
-                phone: person.pic_phone
-            }));
-            // console.log("PIC data fetched:", people);
-        } catch (error) {
-            console.error('Error fetching PIC data:', error);
-        }
-
-        if (!nameInput || !phoneInput || !suggestions || !projectInput || !deliverToInput) {
-          console.error("Required input elements not found.");
-          return;
-        }
-
+        populateSelectUpdate();
+        
         // Set default values
         document.getElementById('pic').value = data.data[0].pic;
         document.getElementById('phone').value = data.data[0].pic_phone;
@@ -223,59 +269,6 @@ async function showEditForm(deliveryId) {
           const quantityInputs = document.querySelectorAll('input[name="quantity[]"]');
           materialInputs[materialInputs.length - 1].value = detail.material;
           quantityInputs[quantityInputs.length - 1].value = detail.quantity;
-        });
-
-        // Populate project fields and add event listener for autocomplete
-        projectInput.addEventListener('input', function () {
-          const query = projectInput.value.toLowerCase();
-          suggestionProject.innerHTML = '';
-          if (query) {
-            const filteredProjects = projects.filter(project =>
-              project.projectName.toLowerCase().includes(query)
-            );
-            filteredProjects.forEach(project => {
-              const suggestionItem = document.createElement('div');
-              suggestionItem.classList.add('suggestion-item', 'list-group-item');
-              suggestionItem.textContent = project.projectName;
-              suggestionItem.addEventListener('click', function () {
-                projectInput.value = project.projectName;
-                deliverToInput.value = project.deliverTo;
-                suggestionProject.innerHTML = '';
-              });
-              suggestionProject.appendChild(suggestionItem);
-            });
-          }
-        });
-
-        // Populate PIC fields and add event listener for autocomplete
-        nameInput.addEventListener('input', function() {
-          var query = nameInput.value.toLowerCase();
-          suggestions.innerHTML = '';
-          if (query) {
-              var filteredPeople = people.filter(function(person) {
-                  return person.name.toLowerCase().includes(query);
-              });
-              filteredPeople.forEach(function(person) {
-                  var div = document.createElement('div');
-                  div.className = 'suggestion-item';
-                  div.textContent = person.name + " (" + person.phone + ")";
-                  div.addEventListener('click', function() {
-                      nameInput.value = person.name;
-                      phoneInput.value = person.phone;
-                      suggestions.innerHTML = '';
-                  });
-                  suggestions.appendChild(div);
-              });
-          }
-        });
-
-        document.addEventListener('click', function(event) {
-          if (!event.target.closest('#pic') && !event.target.closest('#suggestions')) {
-              suggestions.innerHTML = '';
-          }
-          if (!event.target.closest('#project') && !event.target.closest('#suggestionProject')) {
-              suggestionProject.innerHTML = '';
-          }
         });
 
       },
@@ -342,7 +335,7 @@ async function showEditForm(deliveryId) {
             `${updateDeliveryNote}${deliveryId}`,
             {
               method: "PUT",
-              headers: headersTes,
+              headers: headers,
               body: JSON.stringify(updatedData),
             }
           );

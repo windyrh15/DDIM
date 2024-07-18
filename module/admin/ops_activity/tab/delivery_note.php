@@ -3,7 +3,7 @@
         <div class="col-xl-12 col-lg-12 col-md-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center">
-                    <input type="text" id="search-input" class="style-input" placeholder="Search...">
+                    <input type="text" id="search-inputDn" class="style-input" placeholder="Search...">
                     <div class="d-flex align-items-center justify-content-center flex-grow-1">
                         <b class="text-primary" id="filter"></b>
                     </div>

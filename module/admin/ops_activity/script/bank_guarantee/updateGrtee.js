@@ -4,13 +4,11 @@ async function populateUpdateProjectGrtee() {
     var updateProjects = [];
 
     try {
-        const projectResponse = await fetch('https://apiddim.booq.id/project', {
-            headers: {
-                'Authorization': 'Bearer DpacnJf3uEQeM7HN'
-            }
+        const projectResponse = await fetch(projectData, {
+            headers: headers
         });
-        const projectData = await projectResponse.json();
-        updateProjects = projectData.dataProject.map(project => ({
+        const projectResponseData = await projectResponse.json(); // Mengubah nama variabel
+        updateProjects = projectResponseData.dataProject.map(project => ({
             name: project.project_name,
         }));
     } catch (error) {
@@ -101,22 +99,29 @@ async function showUpdateGrtee(grteeId) {
 
                 populateUpdateProjectGrtee();
 
-                const fileInput = document.querySelector('.custom-file-input');
-                const fileLabel = document.querySelector('.custom-file-label');
-
-                fileInput.addEventListener('change', function (e) {
-                    if (fileInput.files.length > 0) {
-                        fileLabel.innerText = fileInput.files[0].name;
+                document.addEventListener('DOMContentLoaded', function() {
+                    const fileInput = document.querySelector('#update_fileInput');
+                    const fileLabel = document.querySelector('#LabelFileInput');
+                
+                    if (fileInput && fileLabel) {
+                        fileInput.addEventListener('change', function(e) {
+                            // Ambil nama file pertama yang dipilih
+                            if (fileInput.files.length > 0) {
+                                fileLabel.textContent = fileInput.files[0].name;
+                            } else {
+                                fileLabel.textContent = 'Choose file'; // Atur teks default jika tidak ada file yang dipilih
+                            }
+                        });
+                    } else {
+                        console.error('File input or label not found');
                     }
                 });
             },
             preConfirm: async () => {
-                const owner = Swal.getPopup().querySelector("#update_owner_id").value;
-                const user = Swal.getPopup().querySelector("#update_user_id").value;
                 const start_date = Swal.getPopup().querySelector("#update_start_date").value;
                 const close_date = Swal.getPopup().querySelector("#update_close_date").value;
                 const project = Swal.getPopup().querySelector("#update_project").value;
-                const bond_n = Swal.getPopup().querySelector("#update_bond_number").value;
+                const bond_number = Swal.getPopup().querySelector("#update_bond_number").value;
                 const bond = Swal.getPopup().querySelector("#update_bond").value;
                 const amount = Swal.getPopup().querySelector("#update_amount").value;
                 const collateral = Swal.getPopup().querySelector("#update_collateral").value;
@@ -127,13 +132,10 @@ async function showUpdateGrtee(grteeId) {
                 const file = fileInput.files[0];
 
                 const formData = new FormData();
-                formData.append("owner_id", owner);
-                formData.append("user_id", user);
-                formData.append("status_id", 1);
                 formData.append("start_date", start_date);
                 formData.append("close_date", close_date);
                 formData.append("project", project);
-                formData.append("bond_number", bond_n);
+                formData.append("bond_number", bond_number);
                 formData.append("bond", bond);
                 formData.append("amount", amount);
                 formData.append("collateral", collateral);
@@ -145,11 +147,9 @@ async function showUpdateGrtee(grteeId) {
                 }
 
                 try {
-                    const res = await fetch('https://apiddim.booq.id/update/bank/guarantee', {
-                        method: "POST",
-                        headers: {
-                            'Authorization': 'Bearer DpacnJf3uEQeM7HN'
-                        },
+                    const res = await fetch(bgUpdate, {
+                        method: "PUT",
+                        headers: headers,
                         body: formData,
                     });
 

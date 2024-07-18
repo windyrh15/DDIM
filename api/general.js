@@ -3,29 +3,18 @@ let params = new URLSearchParams(queryString);
 
 let page = params.get("page");
 
-const token = "DpacnJf3uEQeM7 HN";
-
-// Just Tes -------------------------------------------------------
-const token2Tes = "DpacnJf3uEQeM7HN";
-// ----------------------------------------------------------------
+const token = 'DpacnJf3uEQeM7HN';
 
 const headers = {
-  Authorization: `Bearer ${token}`,
-  "Content-Type": "application/json",
+  'Authorization': `Bearer ${token}`,
+  'Content-Type': 'application/json'
 };
-
-// HeadersTes -------------------------------------------------------
-const headersTes = {
-  Authorization: `Bearer ${token2Tes}`,
-  "Content-Type": "application/json",
-};
-// -----------------------------------------------------------------
 
 const headerFormData = {
-  Authorization: `Bearer ${token}`,
+  'Authorization': `Bearer ${token}`
 };
 
-const baseUrl = "https://apiddim.booq.id";
+const baseUrl = 'https://apiddim.booq.id';
 
 let sales = "sales";
 let dataUser = `${baseUrl}/data/sales/user`;
@@ -55,7 +44,6 @@ let uploadFileProject = `${baseUrl}/file/project`;
 let deleteFileProject = `${baseUrl}/delete/file/project`;
 let getFolderProject = `${baseUrl}/document/project`;
 let getFileProject = `${baseUrl}/doc/project/file`;
-let getExpensesProject = `${baseUrl}/project/expenses/finance`;
 let cancelProject = `${baseUrl}/cancel/project`;
 let delProject = `${baseUrl}/delete/project`;
 let finishProject = `${baseUrl}/update/status/project`;
@@ -64,45 +52,41 @@ let finance = "finance";
 let financeData = `${baseUrl}/finance`;
 let accountFinance = `${baseUrl}/account/finance`;
 let categoryFinance = `${baseUrl}/transaction/category/finance`;
-let addExpensesFinance = `${baseUrl}/project/expenses/finance`;
 let cashflowFinance = `${baseUrl}/cashflow/finance`;
+let projectExpenses = `${baseUrl}/project/expenses`;
 
 let admin = "admin";
 let getVendor = `${baseUrl}/vendor`;
-
-// Delivery Note -----------------------------------------------------------------------------------------
-
-let deliveryNote = `${baseUrl}/delivery/note/`; // new API delivery note
-let picData = `${baseUrl}/data/pic`; //PIC DATA
-
-let addDeliveryNote = `${baseUrl}/delivery/note/`; //setting ke POST
-let updateDeliveryNote = `${baseUrl}/update/delivery/note/`; //setting ke PUT
-let deleteDeliveryNote = `${baseUrl}/delete/delivery/note/`; //setting ke PUT
-
-let lastNumberDelivery = `${baseUrl}/lastnumber/delivery/note`; //new API lastnumber Delivery note
-
-// Bank Guarantee ----------------------------------------------------------------------------------------
-
-let getBgData = `${baseUrl}/bank/guarantee`;
-let addBgData = `${baseUrl}/bank/guarantee`;
-let updateBgData = `${baseUrl}/update/bank/guarantee`;
-let deleteBgData = `${baseUrl}/delete/bank/guarantee`
-
-// -------------------------------------------------------------------------------------------------------
-
 let purchaseOrder = `${baseUrl}/purchase/order`;
-let lastNumberPo = `${baseUrl}/lastnumber/purchase/order`;
+let lastNumberPo =`${baseUrl}/lastnumber/purchase/order`;
 
 let getClient = "api/admin/client.json";
 let getEmployee = "api/admin/employee.json";
 
 let letterCode = `${baseUrl}/letter/code`;
-let lastNumberLetter = `${baseUrl}/lastnumber/official/letter`;
-let addLetter = `${baseUrl}/add/letter`;
-let letterData = `${baseUrl}/data/letter`;
-let letterDelete = `${baseUrl}/delete/letter`;
-let letterUpdate = `${baseUrl}/update/letter`;
+let lastNumberLetter =`${baseUrl}/lastnumber/official/letter`;
+let addLetter =`${baseUrl}/add/letter`;
+let letterData =`${baseUrl}/data/letter`;
+let letterDelete =`${baseUrl}/delete/letter`;
+let letterUpdate =`${baseUrl}/update/letter`;
 
-let getLetterDoc = `${baseUrl}/document/letter`
-let addLetterFolder = `${baseUrl}/folder/letter`
-let addLetterFile = `${baseUrl}/file/letter`
+let letterGetDoc = `${baseUrl}/document/letter`;
+
+let letterAddFolder = `${baseUrl}/folder/letter`;
+let letterUpdateFolder = `${baseUrl}/update/folder/letter`
+let letterAddFile = `${baseUrl}/file/letter`;
+
+let deliveryNote = `${baseUrl}/delivery/note/`;
+let picData = `${baseUrl}/data/pic`;
+let addDeliveryNote = `${baseUrl}/delivery/note/`;
+let updateDeliveryNote = `${baseUrl}/update/delivery/note/`;
+let deleteDeliveryNote = `${baseUrl}/delete/delivery/note/`;
+let lastNumberDelivery = `${baseUrl}/lastnumber/delivery/note`;
+
+let bgData = `${baseUrl}/bank/guarantee`;
+let bgSummary = `${baseUrl}/summary/bank/guarantee`;
+let bgInput = `${baseUrl}/bank/guarantee`;
+let bgDelete = `${baseUrl}/delete/bank/guarantee`;
+let bgUpdate = `${baseUrl}/update/bank/guarantee`;
+let bgStatusUpdate = `${baseUrl}/update/status/bank/guarantee`;
+let bgFile = `${baseUrl}/file/bank/guarantee`;

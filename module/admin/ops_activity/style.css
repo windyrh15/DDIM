@@ -143,8 +143,8 @@
   cursor: pointer;
 }
 
-/* Suggest Project */
-#suggestionProject {
+/* Suggest Project / Pic */
+.suggestion {
   border-radius: 2%;
   max-height: 150px;
   overflow-y: auto;

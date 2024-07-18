@@ -1,108 +1,109 @@
 const deliveryNoteApp = (() => {
   let dnData;
-  const dnUrl = deliveryNote;
-  const dnCustomTime = new Date().getTime();
-  const dnVersion = `${dnUrl}?v=${dnCustomTime}`;
-  const dnTbody = document.querySelector("#deliveryNote tbody");
-  const dnSearchInput = document.querySelector("#search-input");
-  const dnPageSize = 10;
-  let dnCurrentPage = 1;
+const dnUrl = deliveryNote;
+const dnCustomTime = new Date().getTime();
+const dnVersion = `${dnUrl}?v=${dnCustomTime}`;
+const dnTbody = document.querySelector("#deliveryNote tbody");
+const dnSearchInput = document.querySelector("#search-inputDn");
+const dnPageSize = 10;
+let dnCurrentPage = 1;
 
-  function displayDnData(
-    page,
-    searchQuery = "",
-    filterUser = "",
-    filterType = "",
-    filterStatus = "",
-    filterYear = "",
-    startDate = "",
-    endDate = ""
-  ) {
-    dnCurrentPage = page;
-    const dnStartIdx = (dnCurrentPage - 1) * dnPageSize;
-    const dnEndIdx = dnStartIdx + dnPageSize;
-    const dnFilteredData = dnData.data.filter((dnItem) => {
-      const userMatched =
-        filterUser === "" ||
-        dnItem.nama.toLowerCase() === filterUser.toLowerCase();
-      const typeMatched =
-        filterType === "" ||
-        dnItem.project_type.toLowerCase() === filterType.toLowerCase();
-      const statusMatched =
-        filterStatus === "" || dnItem.status_sales === filterStatus;
-      const yearMatched =
-        filterYear === "" ||
-        new Date(dnItem.tanggal).getFullYear() == filterYear;
-      const startDateMatched =
-        startDate === "" || new Date(dnItem.date) >= new Date(startDate);
-      const endDateMatched =
-        endDate === "" || new Date(dnItem.date) <= new Date(endDate);
-      const searchMatched =
-        searchQuery === "" ||
-        dnItem.date.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        dnItem.project_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        dnItem.customer.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        dnItem.no_dn.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        dnItem.pic.toString().includes(searchQuery.toLowerCase()) ||
-        dnItem.pic_phone.toLowerCase().includes(searchQuery.toLowerCase());
+function displayDnData(
+  page,
+  searchQuery = "",
+  filterUser = "",
+  filterType = "",
+  filterStatus = "",
+  filterYear = "",
+  startDate = "",
+  endDate = ""
+) {
+  dnCurrentPage = page;
+  const dnStartIdx = (dnCurrentPage - 1) * dnPageSize;
+  const dnEndIdx = dnStartIdx + dnPageSize;
+  const dnFilteredData = dnData.data.filter((dnItem) => {
+    const userMatched =
+      filterUser === "" ||
+      (dnItem.nama && dnItem.nama.toLowerCase() === filterUser.toLowerCase());
+    const typeMatched =
+      filterType === "" ||
+      (dnItem.project_type && dnItem.project_type.toLowerCase() === filterType.toLowerCase());
+    const statusMatched =
+      filterStatus === "" || dnItem.status_sales === filterStatus;
+    const yearMatched =
+      filterYear === "" ||
+      new Date(dnItem.tanggal).getFullYear() == filterYear;
+    const startDateMatched =
+      startDate === "" || new Date(dnItem.date) >= new Date(startDate);
+    const endDateMatched =
+      endDate === "" || new Date(dnItem.date) <= new Date(endDate);
+    const searchMatched =
+      searchQuery === "" ||
+      (dnItem.date && dnItem.date.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (dnItem.project_name && dnItem.project_name.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (dnItem.customer && dnItem.customer.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (dnItem.no_dn && dnItem.no_dn.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (dnItem.pic && dnItem.pic.toString().includes(searchQuery.toLowerCase())) ||
+      (dnItem.pic_phone && dnItem.pic_phone.toLowerCase().includes(searchQuery.toLowerCase()));
 
-      return (
-        userMatched &&
-        typeMatched &&
-        statusMatched &&
-        yearMatched &&
-        startDateMatched &&
-        endDateMatched &&
-        searchMatched
-      );
+    return (
+      userMatched &&
+      typeMatched &&
+      statusMatched &&
+      yearMatched &&
+      startDateMatched &&
+      endDateMatched &&
+      searchMatched
+    );
+  });
+
+  const dnTotalPages = Math.ceil(dnFilteredData.length / dnPageSize);
+  const dnPaginatedData = dnFilteredData.slice(dnStartIdx, dnEndIdx);
+  dnTbody.innerHTML = "";
+  let dnIndex = dnStartIdx + 1;
+  dnPaginatedData.forEach((dnItem) => {
+    const dnRow = document.createElement("tr");
+
+    let materialDetails = "";
+    dnItem.material_detail.forEach((material) => {
+      materialDetails += `
+            <ul>
+                <li>Quantity : ${material.quantity}</li>
+                <li>Material : ${material.material}</li>
+            </ul>
+        `;
     });
 
-    const dnTotalPages = Math.ceil(dnFilteredData.length / dnPageSize);
-    const dnPaginatedData = dnFilteredData.slice(dnStartIdx, dnEndIdx);
-    dnTbody.innerHTML = "";
-    let dnIndex = dnStartIdx + 1;
-    dnPaginatedData.forEach((dnItem) => {
-      const dnRow = document.createElement("tr");
-
-
-      let materialDetails = "";
-      dnItem.material_detail.forEach((material) => {
-        materialDetails += `
-              <ul>
-                  <li>Quantity : ${material.quantity}</li>
-                  <li>Material : ${material.material}</li>
-              </ul>
-          `;
-      });
-
-      dnRow.innerHTML = `
-              <td class="d-none d-md-table-cell ta-center">${dnIndex}</td>
-              <td class="d-none d-md-table-cell ta-start">${dnItem.date}</td>
-              <td class="d-none d-md-table-cell ta-start">${materialDetails}</td>
-              <td class="d-none d-md-table-cell ta-start">${dnItem.project}</td>
-              <td class="d-none d-md-table-cell ta-end">${dnItem.customer}</td>
-              <td class="d-none d-md-table-cell ta-start">${dnItem.no_dn}</td>
-              <td class="d-none d-md-table-cell ta-start">${dnItem.pic}</td>
-              <td class="d-none d-md-table-cell ta-start">${dnItem.pic_phone}</td>
-              <td class="d-none d-sm-table-cell ta-center action-column">
-                <center><div class="dropdown no-arrow mb-4">
-              <button class="btn btn-primary dropdown-toggle mt-4" type="button" id="dnDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Action
-              </button>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dnDropdownMenuButton">
+    dnRow.innerHTML = `
+            <td class="d-none d-md-table-cell ta-center">${dnIndex}</td>
+            <td class="d-none d-md-table-cell ta-start">${dnItem.date}</td>
+            <td class="d-none d-md-table-cell ta-start">${materialDetails}</td>
+            <td class="d-none d-md-table-cell ta-start">${dnItem.project}</td>
+            <td class="d-none d-md-table-cell ta-end">${dnItem.customer}</td>
+            <td class="d-none d-md-table-cell ta-start">${dnItem.no_dn}</td>
+            <td class="d-none d-md-table-cell ta-start">${dnItem.pic}</td>
+            <td class="d-none d-md-table-cell ta-start">${dnItem.pic_phone}</td>
+            <td class="d-none d-sm-table-cell ta-center action-column">
+              <center><div class="dropdown no-arrow mb-4">
+            <button class="btn btn-primary dropdown-toggle mt-4" type="button" id="dnDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Action
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dnDropdownMenuButton">
               <a class="dropdown-item dn-info-btn text-info" onclick="showEditForm(${dnItem.delivery_id})">Edit</a>
-                <a class="dropdown-item dn-delete-btn text-danger" onclick="deleteDelNote(${dnItem.delivery_id})">Delete</a>
-              </div> 
-              </div></center>
-            </td>
-          `;
-      dnTbody.appendChild(dnRow);
-      dnIndex++;
-    });
+              <a class="dropdown-item dn-delete-btn text-danger" onclick="deleteDelNote(${dnItem.delivery_id})">Delete</a>
+            </div> 
+            </div></center>
+          </td>
+        `;
+    dnTbody.appendChild(dnRow);
+    dnIndex++;
+  });
 
-    createDnPaginationButtonsPC(dnTotalPages);
-    createDnPaginationButtonsMobile(dnTotalPages);
-  }
+  createDnPaginationButtonsPC(dnTotalPages);
+  createDnPaginationButtonsMobile(dnTotalPages);
+}
+
+// CreateDN Pagination Button --------------------------------------------------------------------------------------------------
 
   function createDnPaginationButtonsPC(dnTotalPages) {
     const dnPaginationContainer = document.querySelector(
@@ -156,6 +157,8 @@ const deliveryNoteApp = (() => {
     dnPaginationContainer.appendChild(dnLastButton);
   }
 
+  // CreateDN Pagination Button Mobile--------------------------------------------------------------------------------------------------
+
   function createDnPaginationButtonsMobile(dnTotalPages) {
     const dnPaginationContainer = document.querySelector(
       "#pagination-container-mobile"
@@ -208,6 +211,8 @@ const deliveryNoteApp = (() => {
     });
     dnPaginationContainer.appendChild(dnLastButton);
   }
+
+  // FetchDnData ------------------------------------------------------------------------------------------------------------------------
 
   function fetchDnData() {
     const dnLoadingRow = document.createElement("tr");

@@ -1,6 +1,5 @@
 const dropdownCode = document.getElementById("id");
 const urlLastNumber = lastNumberLetter;
-const addButtonOffLatter = document.querySelector('#inputBtnOffLatter');
 
 async function getLetterCode() {
   try {
@@ -33,8 +32,8 @@ async function fillLetterCodeDropdown(selectedCodeId) {
     const codeResponse = await getLetterCode();
     const code = codeResponse.letterCode;
 
-    // console.log(codeResponse)
-    // console.log(code)
+    console.log(codeResponse)
+    console.log(code)
 
     code.forEach(function (item) {
       let option = `<option value='${item.id}' data-kode-type='${item.code}'>${item.classification} (${item.initial})</option>`;
@@ -142,60 +141,10 @@ document.getElementById("client").addEventListener("input", function() {
 });
 }
 
-async function populateClient() {
-  var clients = [];
-
-  try {
-      // Fetch client data
-      const clientResponse = await fetch('https://apiddim.booq.id/data/sales/client', {
-          headers: {
-              'Authorization': 'Bearer DpacnJf3uEQeM7 HN'
-          }
-      });
-      const clientData = await clientResponse.json();
-      clients = clientData.dataClient.map(client => ({
-          name: client.nama_client
-      }));
-  } catch (error) {
-      console.error('Error fetching client data:', error);
-  }
-
-  // Populate client input
-  var clientInput = document.getElementById('client');
-  var suggestionClient = document.getElementById('suggestionClient');
-
-  clientInput.addEventListener('input', function() {
-      var query = clientInput.value.toLowerCase();
-      suggestionClient.innerHTML = '';
-      if (query) {
-          var filteredClients = clients.filter(function(client) {
-              return client.name.toLowerCase().includes(query);
-          });
-          filteredClients.forEach(function(client) {
-              var div = document.createElement('div');
-              div.className = 'suggestion-item';
-              div.textContent = client.name;
-              div.addEventListener('click', function() {
-                  clientInput.value = client.name;
-                  suggestionClient.innerHTML = '';
-              });
-              suggestionClient.appendChild(div);
-          });
-      }
-  });
-
-  document.addEventListener('click', function(event) {
-      if (!event.target.closest('#client') && !event.target.closest('#suggestionClient')) {
-          suggestionClient.innerHTML = '';
-      }
-  });
-}
-
-
-
 async function sendLetterData(formData) {
     try {
-        const response = await fetch(addLetter, {
+        const url = addLetter;
+        const response = await fetch(url, {
             method: 'POST',
             headers: headers,
             body: formData,
@@ -215,7 +164,7 @@ async function sendLetterData(formData) {
     }
 }
 // Mendengarkan klik pada tombol untuk menambahkan data penjualan
-addButtonOffLatter.addEventListener("click", async function () {
+inputBtnOffLatter.addEventListener("click", async function () {
     try {
         const response = await fetch("module/" + page + "/modal/official_latter/inputOffLatter.php");
         const htmlContent = await response.text();
@@ -228,7 +177,6 @@ addButtonOffLatter.addEventListener("click", async function () {
             cancelButtonText: "Cancel",
             focusConfirm: false,
             didOpen: async () => {
-                await populateClient();
                 await fillLetterCodeDropdown();
                 document
                     .getElementById("client")
@@ -247,20 +195,28 @@ addButtonOffLatter.addEventListener("click", async function () {
                 const subject = Swal.getPopup().querySelector("#subject").value;
                 const beneficiary = Swal.getPopup().querySelector("#beneficiary").value;
                 const client = Swal.getPopup().querySelector("#client").value;
-                // const fileInput = Swal.getPopup().querySelector("#file");
-                // const file = fileInput.files[0];
+                const fileInput = Swal.getPopup().querySelector("#file");
                 
                 if (!tanggal || !letter_code_id || !prefix || !no_letter || !subject || !beneficiary || !client) {
                         Swal.showValidationMessage("All fields are required!");
                         return;
                     }
                     
+                // if (file) {
+                //     const allowedExtensions = ["pdf"];
+                //     const fileExtension = file.name.split(".").pop();
+                //     if (!allowedExtensions.includes(fileExtension)) {
+                //         Swal.showValidationMessage(`Invalid file extension. Only .pdf files are allowed.`);
+                //         return;
+                //     }
+                // }
+                
                 // Membuat objek FormData
                 const formData = new FormData();
                 formData.append("owner_id", owner_id);
                 formData.append("user_id", user_id);
                 formData.append("date", tanggal);
-                formData.append("later_code_id", letter_code_id);
+                formData.append("letter_code_id", letter_code_id);
                 formData.append("prefix", prefix);
                 formData.append("no_letter", no_letter);
                 formData.append("subject", subject);

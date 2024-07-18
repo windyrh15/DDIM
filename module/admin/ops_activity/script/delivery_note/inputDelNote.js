@@ -55,7 +55,7 @@ function tambahMaterial() {
     container.appendChild(materialFormInput);
   }
   
-  // Cek Material Form ---------------------------------------------------------------------------------------
+  // Cek Material Form ------------------------------------------------------------------------------------------------------------
   
   // Fungsi untuk memastikan setidaknya ada satu input material dan quantity yang terisi
   function validateMaterials() {
@@ -71,31 +71,27 @@ function tambahMaterial() {
   }
   
 
-async function populateSelect() {
+  async function populateSelect() {
     var projects = [];
     var people = [];
 
     try {
         // Fetch project data
-        const projectResponse = await fetch('https://apiddim.booq.id/project', {
-            headers: {
-                'Authorization': 'Bearer DpacnJf3uEQeM7 HN'
-            }
+        const projectResponse = await fetch(projectData, {
+            headers: headers
         });
-        const projectData = await projectResponse.json();
-        projects = projectData.dataProject.map(project => ({
+        const projectResponseData = await projectResponse.json();
+        projects = projectResponseData.dataProject.map(project => ({
             name: project.project_name,
             client: project.client
         }));
 
         // Fetch PIC data
-        const picResponse = await fetch('https://apiddim.booq.id/data/pic', {
-            headers: {
-                'Authorization': 'Bearer DpacnJf3uEQeM7HN'
-            }
+        const picResponse = await fetch(picData, {
+            headers: headers
         });
-        const picData = await picResponse.json();
-        people = picData.data.map(person => ({
+        const picResponseData = await picResponse.json();
+        people = picResponseData.data.map(person => ({
             name: person.pic,
             phone: person.pic_phone
         }));
@@ -132,7 +128,7 @@ async function populateSelect() {
     // Populate PIC input
     var nameInput = document.getElementById('pic');
     var phoneInput = document.getElementById('phone');
-    var suggestions = document.getElementById('suggestions');
+    var suggestions = document.getElementById('suggestionsPic');
 
     nameInput.addEventListener('input', function() {
         var query = nameInput.value.toLowerCase();
@@ -165,10 +161,7 @@ async function populateSelect() {
     });
 }
 
-async function run() {
-    document.getElementById("materialButton").addEventListener("click", tambahMaterial);
-    await populateSelect();
-}
+// ShowInputForm ----------------------------------------------------------------------------------------------------------------------------------------
 
 async function showInputForm() {
     try {
@@ -184,7 +177,7 @@ async function showInputForm() {
             cancelButtonText: "Cancel",
             focusConfirm: false,
             didOpen: async () => {
-                run();
+                populateSelect();
             },
             preConfirm: async () => {
                 const owner = Swal.getPopup().querySelector("#owner_id").value;
@@ -248,7 +241,7 @@ async function showInputForm() {
                 try {
                     const res = await fetch(addDeliveryNote, {
                         method: "POST",
-                        headers: headersTes,
+                        headers: headers,
                         body: JSON.stringify(newData),
                     });
 
@@ -266,7 +259,7 @@ async function showInputForm() {
                     }
                 } catch (error) {
                     console.error("Error adding data:", error);
-                    Swal.fire("Error", "Failed to add data", "error");
+                    Swal.fire("Error", "Data Gagal di tambahkan", "error");
                 }
             },
         });

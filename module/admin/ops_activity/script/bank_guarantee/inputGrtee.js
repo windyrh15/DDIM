@@ -1,60 +1,3 @@
-/**
- * 
- * masih ada perbaikan (deadline besok!)
- * 1. file yang di input harus berupa PDF tidak boleh yang lain
- * 2. Edit belum selesai
- * 3. file belum di tamilkan ke table
- */
-
-document.querySelector('#inputBtnGrtee').addEventListener('click', showInputGrtee);
-
-async function populateProjectGrtee() {
-    var projects = [];
-
-    try {
-        const projectResponse = await fetch('https://apiddim.booq.id/project', {
-            headers: {
-                'Authorization': 'Bearer DpacnJf3uEQeM7HN'
-            }
-        });
-        const projectData = await projectResponse.json();
-        projects = projectData.dataProject.map(project => ({
-            name: project.project_name,
-        }));
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
-
-    var projectInput = document.getElementById('project');
-    var suggestionProject = document.getElementById('suggestionProject');
-
-    projectInput.addEventListener('input', function() {
-        var query = projectInput.value.toLowerCase();
-        suggestionProject.innerHTML = '';
-        if (query) {
-            var filteredProjects = projects.filter(function(project) {
-                return project.name.toLowerCase().includes(query);
-            });
-            filteredProjects.forEach(function(project) {
-                var div = document.createElement('div');
-                div.textContent = project.name;
-                div.className = 'suggestion-item';
-                div.addEventListener('click', function() {
-                    projectInput.value = project.name;
-                    suggestionProject.innerHTML = '';
-                });
-                suggestionProject.appendChild(div);
-            });
-        }
-    });
-
-    document.addEventListener('click', function(event) {
-        if (!event.target.closest('#project') && !event.target.closest('#suggestionProject')) {
-            suggestionProject.innerHTML = '';
-        }
-    });
-}
-
 async function showInputGrtee() {
     try {
         const response = await fetch("module/" + page + "/modal/bank_guarantee/inputGrtee.php");
@@ -97,6 +40,11 @@ async function showInputGrtee() {
                 const fileInput = Swal.getPopup().querySelector("#fileInput");
                 const file = fileInput.files[0];
 
+                if (!file || file.type !== "application/pdf") {
+                    Swal.showValidationMessage("Please upload a PDF file");
+                    return;
+                }
+
                 const formData = new FormData();
                 formData.append("owner_id", owner);
                 formData.append("user_id", user);
@@ -116,11 +64,9 @@ async function showInputGrtee() {
                 }
 
                 try {
-                    const res = await fetch('https://apiddim.booq.id/bank/guarantee', {
+                    const res = await fetch(bgInput, {
                         method: "POST",
-                        headers: {
-                            'Authorization': 'Bearer DpacnJf3uEQeM7HN'
-                        },
+                        headers: headers,
                         body: formData,
                     });
 
@@ -146,3 +92,52 @@ async function showInputGrtee() {
         console.error("Error:", error);
     }
 }
+
+// Fungsi populateProjectGrtee jika diperlukan
+async function populateProjectGrtee() {
+    var projects = [];
+
+    try {
+        const projectResponse = await fetch(projectData, {
+            headers: headers
+        });
+        const projectResponseData = await projectResponse.json();
+        projects = projectResponseData.dataProject.map(project => ({
+            name: project.project_name,
+        }));
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+
+    var projectInput = document.getElementById('project');
+    var suggestionProject = document.getElementById('suggestionProject');
+
+    projectInput.addEventListener('input', function() {
+        var query = projectInput.value.toLowerCase();
+        suggestionProject.innerHTML = '';
+        if (query) {
+            var filteredProjects = projects.filter(function(project) {
+                return project.name.toLowerCase().includes(query);
+            });
+            filteredProjects.forEach(function(project) {
+                var div = document.createElement('div');
+                div.textContent = project.name;
+                div.className = 'suggestion-item';
+                div.addEventListener('click', function() {
+                    projectInput.value = project.name;
+                    suggestionProject.innerHTML = '';
+                });
+                suggestionProject.appendChild(div);
+            });
+        }
+    });
+
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('#project') && !event.target.closest('#suggestionProject')) {
+            suggestionProject.innerHTML = '';
+        }
+    });
+}
+
+// Panggil showInputGrtee saat tombol diklik
+document.querySelector('#inputBtnGrtee').addEventListener('click', showInputGrtee);

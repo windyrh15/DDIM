@@ -26,6 +26,7 @@ if ($detail) {
   $inputOffLatter = filemtime("module/" . $page . "/script/official_latter/inputOffLatter.js");
   $updateOffLatter = filemtime("module/" . $page . "/script/official_latter/editOffLatter.js");
   $deleteOffLatter = filemtime("module/" . $page . "/script/official_latter/deleteOffLatter.js");
+  $docOffLatter = filemtime("module/" . $page . "/script/official_latter/docOffLatter.js");
 
   // Delivery Note ------------------------------------------------------------------------------------------------------
 
@@ -43,7 +44,6 @@ if ($detail) {
   $updateGrtee = filemtime("module/" . $page . "/script/bank_guarantee/updateGrtee.js");
   $deleteGrtee = filemtime("module/" . $page . "/script/bank_guarantee/deleteGrtee.js");
   $updateStatusGrtee = filemtime("module/" . $page . "/script/bank_guarantee/updateStatusGrtee.js");
- 
 
   echo "
 
@@ -52,6 +52,8 @@ if ($detail) {
     <script src='module/$page/script/official_latter/inputOffLatter.js?v=$inputOffLatter'></script>
     <script src='module/$page/script/official_latter/editOffLatter.js?v=$updateOffLatter'></script>
     <script src='module/$page/script/official_latter/deleteOffLatter.js?v=$deleteOffLatter'></script>
+    <script src='module/$page/script/official_latter/docOffLatter.js?v=$docOffLatter'></script>
+
 
     <script src='module/$page/script/delivery_note/getDelNote.js?v=$getDelNote'></script>
     <script src='module/$page/script/delivery_note/getVenDelNote.js?v=$getVenDelNote'></script>

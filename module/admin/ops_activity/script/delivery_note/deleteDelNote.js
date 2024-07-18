@@ -25,7 +25,7 @@ async function deleteDelNoteData(deliverId) {
   try {
     const response = await fetch(`${urlDelete}${deliverId}`, {
       method: "PUT",
-      headers: headersTes,
+      headers: headers,
       body: JSON.stringify({ deleted: "yes" }), // Mengubah deleted menjadi "yes"
     });
     if (!response.ok) {

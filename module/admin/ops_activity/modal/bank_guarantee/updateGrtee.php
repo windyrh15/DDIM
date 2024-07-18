@@ -41,8 +41,14 @@ session_start();
 <div class="form-group">
     <input type="text" class="form-control form-add" name="update_beneficiary" id="update_beneficiary" placeholder="Beneficiary" required>
 </div>
+<div class="form-group">
+    <input type="text" class="form-control form-add" name="update_beneficiary" id="update_beneficiary" placeholder="Beneficiary" required>
+</div>
+<div class="form-group">
+    <input type="text" class="form-control form-add" name="update_beneficiary" id="update_beneficiary" placeholder="Beneficiary" required>
+</div>
 
 <div class="form-group custom-file">
     <input type="file" class="form-control custom-file-input" name="update_fileInput" id="update_fileInput" required>
-    <label class="custom-file-label" for="update_fileInput">Choose file</label>
+    <label class="custom-file-label" for="update_fileInput" id="LabelFileInput"></label>
 </div>

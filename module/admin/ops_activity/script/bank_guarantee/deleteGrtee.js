@@ -17,7 +17,7 @@ function deleteDataGrtee(grteeId) {
   }
   
   async function deleteGrteeData(id) {
-    const urlDelete = deleteBgData;
+    const urlDelete = bgDelete;
     try {
       const response = await fetch(`${urlDelete}/${id}`, {
         method: "PUT",

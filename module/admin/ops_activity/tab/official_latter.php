@@ -16,7 +16,7 @@
     </div>
 </div>
 
-<div id="table-container">
+<div id="table-container" class="table-responsive">
     <table class="table table-striped table-bordered" id="official_letter" width="100%" cellspacing="0">
         <thead class="bg-warna">
             <tr class="ta-center">
@@ -34,7 +34,7 @@
     </table>
 
     <!-- pagination pc -->
-    <div class="d-none d-md-block d-lg-block">
+    <div class="d-none d-md-block d-lg-block mb-4">
         <div id="pagination-container-pc" class="pagination-custom"></div>
     </div>
     <!-- pagination mobile -->

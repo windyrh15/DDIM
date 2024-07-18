@@ -1,14 +1,25 @@
 const bankGuaranteeApp = (() => {
-  let bgData;
-  const bgUrl = getBgData; // URL dari API untuk bank guarantee
+  let dataBg;
+  const bgUrl = bgData; // URL dari API untuk bank guarantee
   const bgCustomTime = new Date().getTime();
   const bgVersion = `${bgUrl}?v=${bgCustomTime}`;
   const bgTbody = document.querySelector("#purchase_order tbody");
-  const bgSearchInput = document.querySelector("#search-input");
+  const bgSearchInput = document.querySelector("#search-inputGrtee");
   const bgTableContainer = document.getElementById("table-container");
   const bgPageSize = 10;
   let bgCurrentPage = 1;
-
+  
+  // Fetch data from API
+  async function fetchBgData() {
+    try {
+      const response = await fetch(bgVersion);
+      dataBg = await response.json();
+      displayBgData(bgCurrentPage);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  }
+  
   function displayBgData(
     page,
     searchQuery = "",
@@ -22,34 +33,35 @@ const bankGuaranteeApp = (() => {
     bgCurrentPage = page;
     const bgStartIdx = (bgCurrentPage - 1) * bgPageSize;
     const bgEndIdx = bgStartIdx + bgPageSize;
-    const bgFilteredData = bgData.data.filter((bgSales) => {
+    const bgFilteredData = dataBg.data.filter((bgFilter) => {
       // Filter data berdasarkan pencarian (jika ada)
       const userMatched =
         filterUser === "" ||
-        bgSales.nama.toLowerCase() === filterUser.toLowerCase();
+        (bgFilter.nama && bgFilter.nama.toLowerCase() === filterUser.toLowerCase());
       const typeMatched =
         filterType === "" ||
-        bgSales.project_type.toLowerCase() === filterType.toLowerCase();
+        (bgFilter.project_type && bgFilter.project_type.toLowerCase() === filterType.toLowerCase());
       const statusMatched =
-        filterStatus === "" || bgSales.status_sales === filterStatus;
+        filterStatus === "" || bgFilter.status_sales === filterStatus;
       const yearMatched =
-        filterYear === "" || new Date(bgSales.tanggal).getFullYear() == filterYear;
+        filterYear === "" || new Date(bgFilter.tanggal).getFullYear() == filterYear;
       const startDateMatched =
-        startDate === "" || new Date(bgSales.date) >= new Date(startDate);
+        startDate === "" || new Date(bgFilter.date) >= new Date(startDate);
       const endDateMatched =
-        endDate === "" || new Date(bgSales.date) <= new Date(endDate);
+        endDate === "" || new Date(bgFilter.date) <= new Date(endDate);
       const searchMatched =
         searchQuery === "" ||
-        bgSales.no_qtn
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase()) ||
-        bgSales.tanggal.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        bgSales.project_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        bgSales.project_type.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        bgSales.total_order.toString().includes(searchQuery) ||
-        bgSales.pelanggan_nama.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        bgSales.status_sales.toString().includes(searchQuery);
-
+        (bgFilter.project && bgFilter.project.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (bgFilter.file && bgFilter.file.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (bgFilter.start_date && bgFilter.start_date.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (bgFilter.close_date && bgFilter.close_date.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (bgFilter.bond && bgFilter.bond.toString().includes(searchQuery)) ||
+        (bgFilter.bank && bgFilter.bank.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (bgFilter.counter_guarantee && bgFilter.counter_guarantee.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (bgFilter.beneficiary && bgFilter.beneficiary.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (typeof bgFilter.period_days === 'string' && bgFilter.period_days.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (bgFilter.status && bgFilter.status.toLowerCase().includes(searchQuery.toLowerCase()));
+  
       return (
         userMatched &&
         typeMatched &&
@@ -60,18 +72,18 @@ const bankGuaranteeApp = (() => {
         searchMatched
       );
     });
-
+  
     const bgTotalPages = Math.ceil(bgFilteredData.length / bgPageSize);
     const bgPaginatedData = bgFilteredData.slice(bgStartIdx, bgEndIdx);
     bgTbody.innerHTML = "";
     let bgIndex = bgStartIdx + 1;
     bgPaginatedData.forEach((bgDataItem) => {
       const bgRow = document.createElement("tr");
-      const bgFile = `https://apiddim.booq.id/file/bank/guarantee/${bgDataItem.file}`
+      const bgFilePath = `${bgFile}/${bgDataItem.file}`; // Inisialisasi variabel di luar innerHTML
       bgRow.innerHTML = `
               <td class="d-none d-md-table-cell ta-center">${bgIndex}</td>
               <td class="d-none d-md-table-cell ta-center">${bgDataItem.project}</td>
-              <td class="d-none d-md-table-cell ta-center"><a href="${bgFile}">${bgDataItem.file}</a></td>
+              <td class="d-none d-md-table-cell ta-center"><a href="${bgFilePath}">${bgDataItem.file}</a></td>
               <td class="d-none d-md-table-cell ta-center">${bgDataItem.start_date}</td>
               <td class="d-none d-md-table-cell ta-center">${bgDataItem.close_date}</td>
               <td class="d-none d-md-table-cell ta-center">${bgDataItem.bond_number}</td>
@@ -99,10 +111,13 @@ const bankGuaranteeApp = (() => {
       bgTbody.appendChild(bgRow);
       bgIndex++;
     });
-
+  
     createBgPaginationButtonsPC(bgTotalPages);
     createBgPaginationButtonsMobile(bgTotalPages);
   }
+  
+// Initialize fetching of data
+// fetchBgData();
 
   function createBgPaginationButtonsPC(bgTotalPages) {
     const bgPaginationContainer = document.querySelector(
@@ -226,9 +241,9 @@ const bankGuaranteeApp = (() => {
       .then((response) => response.json())
       .then((responseData) => {
         bgTbody.innerHTML = "";
-        bgData = responseData;
+        dataBg = responseData;
 
-        if (bgData.data.length === 0) {
+        if (dataBg.data.length === 0) {
           const bgRow = document.createElement("tr");
           bgRow.innerHTML = `
             <td colspan="14" class="text-center">No data available</td>
